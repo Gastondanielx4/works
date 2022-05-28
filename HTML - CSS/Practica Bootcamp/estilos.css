@@ -1,0 +1,20 @@
+.contenedor{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 200px;
+}
+
+.caja{
+    height: 200px;
+    width: 200px;
+    background-color: tomato;
+    transition: transform 1s;
+}
+
+.caja:hover{
+    transform: rotateX(40deg);
+    transform:rotateY(30deg)
+}
+

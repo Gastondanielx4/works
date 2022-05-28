@@ -1,0 +1,383 @@
+/* RESET CSS */
+
+:root {
+    --main-font: sans-serif;
+    --font-size: 16px;
+    --main-color: #f7df1e;
+    --second-color: #222;
+    --main-modal-color: rgba(247, 222, 30, 0.85);
+    --second-modal-color: rgba(34, 34, 34, 0.85);
+    --container-width: 1200px;
+}
+
+html {
+    box-sizing: border-box;
+    font-family: var(--main-font);
+    font-size: var(--font-size);
+    scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin:0;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* menu-hambuguesa */
+.header {
+    position: sticky;
+    top: 0;
+    padding: 1rem;
+    background-color: var(--main-color);
+    color: var(--second-color);
+}
+
+.header h1 {
+    margin: 0 auto;
+    text-align: center;
+}
+.section {
+    padding: 2rem;
+    padding-top: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: var(--container-width);
+    min-height: 100vh;
+    text-align: center;
+}
+.panel {
+    position: fixed;
+    z-index: 998;/* para que se coloque delante de la capa principal */
+    top: 0;     /* para que se estire desde el top al bottom y del right al left, es decir toda la pantalla */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: var(--second-modal-color);
+    opacity: 0; /* invisible */
+    overflow-y: auto; /* para que tenga una barra de scroll aparte */
+    transition: transform .3s ease, opacity 1s ease;
+    /* De arriba */
+    transform: translate(0, -100%);
+    /* De abajo */
+    transform: translate(0, 100%);
+    /* Del costado izquierdo */
+    transform: translate(100%, 0);
+    /* Del costado derecho */
+    transform: translate(-100%, 0);
+}
+
+.panel.is-active{
+    transform: translate(0, 0);
+    opacity: 1;
+}
+.panel-btn {
+    position: fixed;
+    z-index: 999;
+    bottom: 1vh;
+    right: 1vw;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+}
+.menu {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+.menu a{
+    padding: 2rem;
+    width: inherit;
+    display: block;
+    font-size: 1,5rem;
+    text-decoration: none;
+    color: var(--main-color);
+    transition: all 0.3s ease ;
+}
+.menu a:hover{
+    font-weight: bold;
+    color: var(--second-color);
+    background-color: var(--main-modal-color);
+}
+.hamburguer{
+    background-color: var(--main-color);
+}
+.botonesS1{
+    margin: 1rem;
+}
+.reloj-digital{
+    padding: 2rem;
+    font-family: var(--main-font);
+    font-size: var(--font-size);
+    font-weight: bold;
+}
+.reloj-digital-desactivado{
+    padding: 3rem;
+    display: none;
+}
+.contenedor-bola{
+    background-color: var(--second-color) ;
+    max-width: var(--container-width);
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bola-amarilla{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 100%;
+    background-color: var(--main-color);
+    position: relative;
+    bottom: auto;
+    right: auto;
+}
+
+.scroll-up-btn{
+    text-decoration: none;
+    border-style: none;
+    outline: none;
+    position: fixed;
+    z-index: 999;
+    bottom: 1vh;
+    right: 6rem;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+    visibility: hidden;
+    transition: visibility 0.2s ease, opacity 1.5s ease;
+}
+.scroll-up-btn a{
+    text-decoration: none;
+    border-style: none;
+    outline: none;
+    font-size: 2rem
+}
+.scroll-up-btn:hover {
+    cursor: pointer;
+    opacity: .7;
+}
+/*  DarkThemeButton */
+
+.dark-theme-btn {
+    position: fixed;
+    z-index: 999;
+    bottom: 1vh;
+    left: 1vw;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: var(--main-color);
+    color: var(--second-color);
+    cursor: pointer;
+    outline: 0;
+    border: 0;
+    transition: all 0.3s ease-out;
+}
+
+.dark-theme-btn:hover {
+    background-color: var(--second-color);
+    color: var(--main-color);
+}
+
+.hidden{
+    opacity: 0;
+    visibility: hidden;
+}
+
+.dark-mode{
+    background-color: var(--second-color);
+    color: var(--main-color);
+}
+
+section form {
+    margin: auto;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+}
+.conexion{
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: honeydew;
+    opacity: 0;
+    transition: transform .3s ease, opacity 1s ease;
+    transform: translate(0, -100%);
+}
+.perdida{
+    background-color: brown;
+    transform: translate(0, 0);
+    opacity: 1;
+}
+.reestablecida{
+    background-color: green;
+    transform: translate(0, 0);
+    opacity: 1;
+}
+.cards{
+    border: thin solid var(--second-color);
+    padding: 1rem;
+}
+.card{
+    display: inline-block;
+    background-color: var(--second-color);
+    color: var(--main-color);
+}   
+.card figcaption {
+    padding: 1rem;
+  }
+
+/* CARRUSEL DE IMAGENES */
+.carrusel{
+    position: relative;
+}
+.contenedorImg{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+.contenedorImg img{
+    height: 100%;
+
+}
+.flechas{
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+}
+
+.flechas span{
+    background-color: rgba(245, 222, 179, 0.658);
+    margin: 0;
+    padding: 0;
+    height: 4rem;
+    width: 4rem;
+    border: solid 2px black ;
+    border-radius :100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;    
+}
+.flechas span:hover {
+    background-color: rgba(134, 134, 133, 0.658);
+    transition: all 0.3s ease-in;
+}
+
+/* ScrollSpy */
+@media screen and (min-width: 1024px){
+    body{
+        display: grid;
+        grid-template-columns: 80% 20%;
+        grid-template-rows: 4rem auto;
+        grid-template-areas:
+        "header header"
+        "main panel";
+    }
+    main{
+        grid-area: main;
+
+    }
+    header{
+        grid-area: header;
+
+    }
+    .panel{
+        /* justify y alig se puede asignar tambien cuando esta definido como grid */
+        grid-area: panel;
+        position: sticky;
+        top: 4rem;
+        justify-content: flex-start;
+        align-self: start;
+        background-color: var(--second-color);
+        transform: translate(0, 0);
+        opacity: 1;
+        visibility: visible;
+        overflow-y: auto;
+    }
+    .panel-btn{
+        display: none;
+    }
+    .menu{
+        justify-content: start;
+        text-align: right;
+    }
+    .menu a {
+        font-size: 1rem;
+        pad: 0.75rem;
+    }
+    .menu a:hover,  /* con la coma le añado las propiedades a otra clase */
+    .menu a.active{
+        color: var(--second-color);
+        background-color: var(--main-color);
+    }
+    .scroll-up-btn{
+        right: initial;
+        left: calc(4.25rem + 1vw);
+    }   
+}
+
+/* ESTILOS FORMULARIO DE VALIDACIONES */
+
+#formularioComentarios{
+    width: 80%;
+}
+.divName input, 
+.divEmail input, 
+.divAsunto input, 
+.divComent input {
+    height: 2rem;
+    width: 100%;
+    margin: 0.5rem;
+}
+.divComent input{
+    height: 10rem;
+}
+#comentario{
+    top: 2px;
+}
+#enviar{
+    margin-top: 0.5rem;
+    width: 60%;
+}
+::placeholder{
+    padding-left: 1rem;
+    padding-top: 1rem;
+}

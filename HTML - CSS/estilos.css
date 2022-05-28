@@ -1,0 +1,25 @@
+.contenedor{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 200px;
+}
+
+.caja{
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: ;
+    background-color: tomato;
+    transition: transform 1s;
+}
+
+.caja:hover{
+    transform: rotateX(40deg);
+    transform:rotateY(30deg)
+}
+
+flex-flow: column-reverse wrap;
+justify-content: center;
+align-content: space-between;

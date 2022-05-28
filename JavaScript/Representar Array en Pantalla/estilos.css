@@ -1,0 +1,11 @@
+*{
+    background-color: black;
+    color: burlywood;
+    font-family: sans-serif;
+    font-size: xx-large;
+    font-weight: 800;
+    list-style-type: none;
+}
+#div1 {
+    display: none;
+}

@@ -1,0 +1,1 @@
+console.log("No tengo ES6 - NO SOPORTO EL TIPO MODULO");

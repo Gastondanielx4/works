@@ -1,0 +1,239 @@
+body {
+    padding: 1rem;
+    background-color: salmon;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.3rem;
+}
+
+header{
+    margin: 0;            
+}
+
+.grid_header{
+    display: grid;
+    grid-template: "logo . social"
+                    "logo nav nav";
+    grid-template-columns: 1fr 2fr 2fr ;
+    grid-template-rows: auto auto ;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.logo{
+    grid-area: logo;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+
+.logo a img{
+    height: 20vh;
+    filter: contrast(120%);
+    border-radius: 40%;
+}
+
+.social{
+    grid-area: social;
+    background-color:  rgb(54, 52, 52);
+    padding: 0px;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.social a { 
+}
+
+.inst {
+    height: 4vh;
+}
+
+.fb { 
+    height: 4vh;
+}
+
+.wsp { 
+    height: 4vh;
+}
+
+.linked{
+    height: 4vh;
+}
+
+.navegador{
+    grid-area: nav ;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.5rem;
+    background-color: #092327;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+}
+
+.navegador ul{
+    list-style: none;
+    background: #092327;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: space-around;    
+}
+
+.navegador li{
+    display: inline-block;
+}
+
+.navegador ul li a{
+    text-decoration: none;
+    color: white;
+    display: block;
+    margin:0px;
+    padding: 0.5rem;
+}
+.navegador ul li a:hover{
+    background-color: #ef8354;
+}
+
+.main p {
+    margin: 0px;
+    padding-bottom: 10px;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.grid_main{
+
+    display: grid;
+    grid-template: "imagen imagen imagen"
+                    "teaser1 teaser2 teaser3";
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 4fr 1.4fr ;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.imagen_central {
+    grid-area: imagen;
+    margin: 10px;
+    margin-right: 0px;
+    padding: 4px;
+    border: 2px solid  black;
+    display: flex;
+    justify-content: center;
+    background-color: #0b2c31;
+}
+
+.imagen_central p{
+    margin: 0%;
+    padding: 2px;
+   
+}
+
+.img { 
+    height: 28rem;
+}
+
+
+.teaser1{
+    grid-area: teaser1;
+    border-radius: 4rem;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-weight: bolder;
+    color: rgb(199, 199, 199);
+    text-align: center;
+    padding: 1rem;
+    background-color: #0b2c31 ;
+}
+.teaser1 a{
+    text-decoration: none;
+    color: rgb(199, 199, 199);
+
+}
+
+.teaser1 a:hover {
+    text-decoration: underline;
+    color: dodgerblue;
+}
+
+.teaser2{
+    grid-area: teaser2;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+}
+
+
+.video { 
+    height: 10rem;
+}
+
+.teaser3{
+    grid-area: teaser3;
+    border-radius: 4rem;
+    margin-left: 10px;
+    margin-right: 3px; 
+    font-weight: bolder;
+    color: rgb(199, 199, 199);
+    text-align: center;
+    padding: 1rem;
+    background-color: #0b2c31 ;  
+}
+
+.teaser3 a{
+    text-decoration: none;
+    color: rgb(199, 199, 199);
+}
+
+.teaser3 a:hover {
+    text-decoration: underline;
+    color: dodgerblue;
+}
+
+footer {
+    margin: 0;
+    margin-top: 40px;
+    padding-top: 0.5rem;
+    border-top: 4px solid  black;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: white;
+}
+
+.logo2{
+    display: flex;
+}
+.logo2 a img {
+    height: 8vh;
+    filter: contrast(120%);
+    border-radius: 40%;
+}
+
+.social_f{
+    font-size: 1rem;
+    border-bottom: solid black 4px;
+    padding: 10px;
+    margin-left: 24px;
+    margin-right: 24px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.social_f a{
+    padding: 4px;
+
+}
+
+footer p{
+    padding-left: 30px;
+    border-top: 30px;
+    font-size: 1rem;
+}

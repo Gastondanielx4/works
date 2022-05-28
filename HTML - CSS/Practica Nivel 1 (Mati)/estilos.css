@@ -1,0 +1,131 @@
+body {
+    margin: 50px;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    padding: rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header{
+    margin: 0;            
+}
+
+.grid_header{
+    display: grid;
+    grid-template: "logo . social"
+                    "logo nav nav";
+    grid-template-columns: 2fr 2fr 2fr ;
+    grid-template-rows: auto auto ;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.logo{
+    grid-area: logo;
+    font-size: 50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+    border: 2px solid black;
+    padding: 20px;
+    padding-right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social{
+    grid-area: social;
+    font-size: 20px;
+    border: 2px solid black;
+    padding: 10px;
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.navegador{
+    grid-area: nav ;
+    font-size: 20px;
+    border: 2px solid black;
+    padding: 10px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+main p{
+    margin: 0;
+    padding-bottom: 10px;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.grid_main{
+
+    display: grid;
+    grid-template: "imagen imagen imagen"
+                    "teaser1 teaser2 teaser3";
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 4fr 1.4fr ;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.imagen_central{
+    grid-area: imagen;
+    margin: 10px;
+    margin-right: 0px;
+    padding: 4px;
+    border: 2px solid  black;
+}
+
+.imagen_central p{
+    margin: 0%;
+    padding: 2px;
+}
+
+.teaser1{
+    grid-area: teaser1;
+    border: 2px solid  black;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-weight: bolder;
+}
+
+.teaser2{
+    grid-area: teaser2;
+    border: 2px solid  black;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: bolder;
+}
+
+.teaser3{
+    grid-area: teaser3;
+    border: 2px solid  black;
+    margin-left: 10px;
+    margin-right: 3px; 
+}
+
+footer {
+    margin: 0;
+    margin-top: 40px;
+    border-top: 4px solid  black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.social_f{
+    margin-top: 20px;
+    font-size: 15px;
+    border: 2px solid black;
+    padding: 10px;
+    padding-right: 50px;
+    margin-bottom: 15px;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+footer p{
+    padding-left: 30px;
+    border-top: 30px;
+}
