@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CrudForm from './CrudForm';
 import CrudTable from './CrudTable';
 
@@ -32,11 +32,13 @@ const initialDb = [
 ]
 
 const CrudApp = () => {
+    const [db, setDb] = useState(initialDb);
+
   return (
     <div>
       <h2>CRUD App</h2>
         <CrudForm />
-        <CrudTable />
+        <CrudTable  data={db}/>
     </div>
   )
 }

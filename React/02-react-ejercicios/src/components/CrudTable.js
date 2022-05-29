@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CrudTable = () => {
+const CrudTable = ({data}) => {
   return (
     <div>
       <h3>Tabla de Datos</h3>
@@ -8,17 +8,19 @@ const CrudTable = () => {
           <thead>
               <tr>
                   <th>Nombre</th>
-                  <th>Constelacion</th>
+                  <th>Constelación</th>
                   <th>Acciones</th>
               </tr>
           </thead>
           <tbody>
-              <td>Jon</td>
-              <td>Geminis</td>
-              <td>
-                  <button>Editar</button>
-                  <button>Eliminar</button>
-                </td>
+              <tr>
+                <td>Jon</td>
+                <td>Geminis</td>
+                <td>
+                    <button>Editar</button>
+                    <button>Eliminar</button>
+                    </td>
+              </tr>
           </tbody>
       </table>
     </div>
