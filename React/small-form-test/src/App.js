@@ -6,8 +6,8 @@ function App() {
     <div className="App">
       <header className="App-header">
           <h1>Small Form Test</h1>
-          <SelectSmall />
       </header>
+      <SelectSmall />
     </div>
   );
 }
