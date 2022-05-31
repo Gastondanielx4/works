@@ -3,6 +3,7 @@
     import MenuItem from '@mui/material/MenuItem';
     import FormControl from '@mui/material/FormControl';
     import Select from '@mui/material/Select';
+    import styled, {css, keyframes, ThemeProvider, createGlobalStyle} from "styled-components";
     
     const dataBase = [
         {id:1,
@@ -18,6 +19,20 @@
         name: "Agustina Heredia",
         rol: "Fenomeno"}
     ]
+
+     const BoxYellow = styled.div`
+     width: 40%;
+     height: 30vh;
+     background: linear-gradient(90deg, #f2e013, #f2df1349)
+     ;
+     background: linear-gradient(180deg, #f2e013, #f2df1345)
+     ;
+     color: #1d4345 ;
+     margin: auto;
+     margin-top:3rem;
+     font-weight: bold;
+     font-size:4rem;
+     ` 
     export default function SelectLabels() {
         const [db, setDb] = React.useState({dataBase});
          const [db1, setDb1] = React.useState({dataBase});
@@ -55,7 +70,9 @@
         >
           {dataBase.map((el) =><MenuItem key={el.id} value={el.id}>{el.rol}</MenuItem>)}
         </Select>
-      </FormControl> 
+      </FormControl>
+        <BoxYellow >
+        </BoxYellow> 
     </div>
   );
 }
