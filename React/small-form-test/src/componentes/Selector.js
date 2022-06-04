@@ -40,6 +40,7 @@
         const handleChange = (e) => {
             setDb(e.target.value);
             setDb1(e.target.value)
+            console.log(e.target)
         };
          const handleChange1 = (e) => {
             setDb(e.target.value);
@@ -57,7 +58,7 @@
           label="Name"
           onChange={handleChange}
           >
-           {dataBase.map((el) =><MenuItem key={el.id} value={el.id}>{el.name}</MenuItem>)}
+           {dataBase.map((el) =><MenuItem key={el.id} value={el.id} name={el.name}>{el.name}</MenuItem>)}
         </Select>
       </FormControl>
       <FormControl sx={{ m: 1, minWidth: 300 }}>
@@ -72,6 +73,7 @@
         </Select>
       </FormControl>
         <BoxYellow >
+            <p></p>
         </BoxYellow> 
     </div>
   );
