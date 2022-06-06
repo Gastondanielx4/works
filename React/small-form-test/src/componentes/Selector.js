@@ -1,80 +1,100 @@
-    import * as React from 'react';
-    import InputLabel from '@mui/material/InputLabel';
-    import MenuItem from '@mui/material/MenuItem';
-    import FormControl from '@mui/material/FormControl';
-    import Select from '@mui/material/Select';
-    import styled, {css, keyframes, ThemeProvider, createGlobalStyle} from "styled-components";
-    
-    const dataBase = [
-        {id:1,
-        name: "---------------",
-        rol: "----------------"},
-        {id:2,
-        name: "Matias Heredia",
-        rol: "Erudito"},
-        {id:3,
-        name: "Benjamin Quattrocchi",
-        rol: "Aprendiz"},
-        {id:4,
-        name: "Agustina Heredia",
-        rol: "Fenomeno"}
-    ]
+import * as React from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import styled, {
+  css,
+  keyframes,
+  ThemeProvider,
+  createGlobalStyle,
+} from "styled-components";
 
-     const BoxYellow = styled.div`
-     width: 40%;
-     height: 30vh;
-     background: linear-gradient(90deg, #f2e013, #f2df1349)
-     ;
-     background: linear-gradient(180deg, #f2e013, #f2df1345)
-     ;
-     color: #1d4345 ;
-     margin: auto;
-     margin-top:3rem;
-     font-weight: bold;
-     font-size:4rem;
-     ` 
-    export default function SelectLabels() {
-        const [db, setDb] = React.useState({dataBase});
-         const [db1, setDb1] = React.useState({dataBase});
+const dataBase = [
+  { id: 1, name: "---------------", rol: "----------------" },
+  { id: 2, name: "Matias Heredia", rol: "Erudito" },
+  { id: 3, name: "Benjamin Quattrocchi", rol: "Aprendiz" },
+  { id: 4, name: "Agustina Heredia", rol: "Fenomeno" },
+];
 
-        const handleChange = (e) => {
-            setDb(e.target.value);
-            setDb1(e.target.value)
-            console.log(e.target)
-        };
-         const handleChange1 = (e) => {
-            setDb(e.target.value);
-            setDb1(e.target.value);
-        };
-        
-        return (
-            <div>
+const BoxYellow = styled.div`
+  width: 40%;
+  height: 30vh;
+  background: linear-gradient(90deg, #f2e013, #f2df1349);
+  background: linear-gradient(180deg, #f2e013, #f2df1345);
+  color: #1d4345;
+  margin: auto;
+  margin-top: 3rem;
+  font-weight: bold;
+  font-size: 4rem;
+`;
+
+const initialSelected = {
+  id: null,
+  name: "",
+  rol: "",
+};
+
+export default function Selects() {
+  const [name, setName] = React.useState(initialSelected.name);
+  const [rol, setRol] = React.useState(initialSelected.rol);
+  const [selected, setSelected] = React.useState(initialSelected);
+
+  const handleChange = (e) => {
+    setName(e.target.value);
+    setRol(e.target.value);
+    /* console.log(e.target); */
+    setSelected({
+      ...selected,
+      [e.target.name]: e.target.value,
+    });
+    console.log(e.target);
+    console.log(selected);
+    console.log(initialSelected);
+  };
+
+  return (
+    <div>
       <FormControl sx={{ m: 1, minWidth: 400 }}>
         <InputLabel id="demo-simple-select-helper-label">Name</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={db}
+          value={name}
+          name="Name"
           label="Name"
           onChange={handleChange}
-          >
-           {dataBase.map((el) =><MenuItem key={el.id} value={el.id} name={el.name}>{el.name}</MenuItem>)}
+        >
+          {dataBase.map((el) => (
+            <MenuItem
+              key={el.id}
+              value={el.id}
+              onClick={(e) => console.log(e.target)}
+            >
+              {el.name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
       <FormControl sx={{ m: 1, minWidth: 300 }}>
-          <InputLabel id="demo-simple-select-helper-label">Rol</InputLabel>
+        <InputLabel id="demo-simple-select-helper-label">Rol</InputLabel>
         <Select
-          value={db1}
-          onChange={handleChange1}
+          name="R"
+          value={rol}
+          onChange={handleChange}
           displayEmpty
-          inputProps={{ 'aria-label': 'Rol' }}
+          inputProps={{ "aria-label": "Rol" }}
         >
-          {dataBase.map((el) =><MenuItem key={el.id} value={el.id}>{el.rol}</MenuItem>)}
+          {dataBase.map((el) => (
+            <MenuItem key={el.id} value={el.id}>
+              {el.rol}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
-        <BoxYellow >
-            <p></p>
-        </BoxYellow> 
+      <BoxYellow>
+        <p>{selected.name}</p>
+      </BoxYellow>
     </div>
   );
 }
