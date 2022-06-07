@@ -3,12 +3,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import styled, {
-  css,
-  keyframes,
-  ThemeProvider,
-  createGlobalStyle,
-} from "styled-components";
+import styled from "styled-components";
 
 const dataBase = [
   { id: 1, name: "---------------", rol: "----------------" },
@@ -46,11 +41,12 @@ export default function Selects() {
     /* console.log(e.target); */
     setSelected({
       ...selected,
-      [e.target.name]: e.target.value,
+      name: e.target.value,
     });
     console.log(e.target);
     console.log(selected);
     console.log(initialSelected);
+    console.log(e.target.textContent);
   };
 
   return (

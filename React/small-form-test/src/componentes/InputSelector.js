@@ -6,7 +6,13 @@ import Select from "@mui/material/Select";
 import styled from "styled-components";
 import { TextField } from "@mui/material";
 
-const arrayRol = ["Erudito", "Aprendiz", "Fenomeno"];
+const arrayRol = [
+  "Erudito",
+  "Aprendiz",
+  "Fenomeno",
+  "Developper-Senior",
+  "Devolepper-Junior",
+];
 const BoxYellow = styled.div`
   width: 70%;
   height: 25vh;
@@ -42,12 +48,29 @@ const initialSelected = {
 
 export default function InputSelector() {
   const [selected, setSelected] = React.useState(initialSelected);
+  const [leyenda, setLeyenda] = React.useState("");
+  const [errorName, setErrorName] = React.useState("");
 
   const handleChangeName = (e) => {
     setSelected({
       ...selected,
       name: e.target.value,
     });
+    if (selected.name.length > 25) {
+      setErrorName(true);
+      setLeyenda("Demasiados caracteres");
+      setTimeout(() => {
+        setSelected({
+          ...selected,
+          name: "",
+        });
+        setErrorName(false);
+        setLeyenda("");
+      }, 3000);
+    } else {
+      setErrorName(false);
+      setLeyenda("");
+    }
   };
 
   const handleChangeRol = (e) => {
@@ -62,10 +85,13 @@ export default function InputSelector() {
       <BoxApp>
         <FormControl sx={{ m: 1, minWidth: 400 }}>
           <TextField
+            maxlength="16"
             style={{ backgroundColor: "#51e3ebd5", borderRadius: "10px" }}
             placeholder="Name"
             onChange={handleChangeName}
             value={selected.name}
+            error={errorName}
+            helperText={leyenda}
           ></TextField>
         </FormControl>
         <FormControl sx={{ m: 1, minWidth: 300 }}>
