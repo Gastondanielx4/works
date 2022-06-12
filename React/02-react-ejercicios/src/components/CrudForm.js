@@ -26,7 +26,7 @@ const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    //console.log(form);
 
     if (!form.name || !form.constellation) {
       alert("Datos incompletos");
