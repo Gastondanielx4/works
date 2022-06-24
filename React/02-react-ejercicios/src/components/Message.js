@@ -1,6 +1,6 @@
 import React from "react";
 
-const Message = (msg, bgColor) => {
+const Message = ({ msg, bgColor }) => {
   let styles = {
     padding: "1rem",
     marginBottom: "1rem",
@@ -11,7 +11,8 @@ const Message = (msg, bgColor) => {
   };
   return (
     <div style={styles}>
-      <h2>Mensaje</h2>
+      {/* <h2>{msg}</h2> */}
+      <p dangerouslySetInnerHTML={{ __html: msg }} />
     </div>
   );
 };
