@@ -12,4 +12,3 @@ The key's randomart image is:
 |          .+.o * |
 |          ..o o.o|
 +----[SHA256]-----+
-

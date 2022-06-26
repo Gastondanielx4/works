@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Child from "./Child";
 
-const Parent = () => {
-  const [parentValue, setParentValue] = useState("Hello From Parent");
+const msgParent = "Hello From Parent";
 
-  const handleChild = (msgHIjo, msgParent) => {
+const Parent = () => {
+  const [parentValue, setParentValue] = useState(msgParent);
+
+  const handleChild = (msgHIjo) => {
     if (parentValue === msgParent) {
       setParentValue(msgHIjo);
     } else {
