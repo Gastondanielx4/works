@@ -1,9 +1,13 @@
 import React from "react";
 
-const Child = (props) => {
+const Child = ({ handleChild }) => {
+  const msgParent = "Hello From Parent",
+    msgHIjo = "Hello From Child";
   return (
     <div>
-      <button onClick={props.handleChild}>ChangeParentData</button>
+      <button onClick={() => handleChild(msgHIjo, msgParent)}>
+        ChangeParentData
+      </button>
     </div>
   );
 };
