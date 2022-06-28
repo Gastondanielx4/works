@@ -1,5 +1,12 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  HashRouter,
+  Link,
+} from "react-router-dom";
 import MenuConceptos from "./MenuConceptos";
 import Acerca from "../pages/Acerca";
 import Contact from "../pages/Contact";
@@ -15,6 +22,21 @@ import PrivateRoute from "./PrivateRoute";
 const ConceptosBasicos = () => {
   return (
     <div>
+      <h2>Hash Router</h2>
+      <HashRouter>
+        <MenuConceptos />
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/acerca">Acerca</Link>
+          <Link to="/contacto">Contacto</Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/acerca" element={<Acerca />} />
+          <Route path="/contacto" element={<Contact />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </HashRouter>
       <h2>Conceptos Básicos </h2>
       <BrowserRouter>
         <MenuConceptos />
