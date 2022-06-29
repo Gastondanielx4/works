@@ -5,12 +5,16 @@ import SongDetails from "./SongDetails";
 import SongForm from "./SongForm";
 import { HashRouter, Link, Route, Routes } from "react-router-dom";
 import Error404 from "../pages/Error404";
+import SongTable from "./SongTable";
+
+let mySongsInit = JSON.parse(localStorage.getItem("mySongs")) || [];
 
 const SongSearch = () => {
   const [search, setSearch] = useState(null);
   const [lyric, setLyric] = useState(null);
   const [bio, setBio] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [mySongs, setMySongs] = useState(mySongsInit);
 
   useEffect(() => {
     if (search === null) return;
@@ -37,12 +41,19 @@ const SongSearch = () => {
     };
 
     fetchData();
-  }, [search]);
+
+    localStorage.setItem("mySongs", JSON.stringify(mySongs));
+  }, [search, mySongs]);
 
   const handleSearch = (data) => {
     //console.log(data);
     setSearch(data);
   };
+
+  const handleSaveSong = () => {
+    alert("Salvando cancion en Favoritos");
+  };
+  const handleDeleteSong = (id) => {};
   return (
     <div>
       <HashRouter>
@@ -57,13 +68,19 @@ const SongSearch = () => {
               exact
               path="/canciones"
               element={
-                <div>
-                  <SongForm handleSearch={handleSearch} />
-                  <h2>Tabla de Canciones</h2>
+                <>
+                  <SongForm
+                    handleSearch={handleSearch}
+                    handleSaveSong={handleSaveSong}
+                  />
+                  <SongTable
+                    mySongs={mySongs}
+                    handleDeleteSong={handleDeleteSong}
+                  />
                   {search && !loading && (
                     <SongDetails search={search} lyric={lyric} bio={bio} />
                   )}
-                </div>
+                </>
               }
             />
             <Route
