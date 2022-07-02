@@ -40,7 +40,7 @@ const SongSearch = () => {
       setLoading(false);
     };
 
-    fetchData();
+    if (search !== null) fetchData();
 
     localStorage.setItem("mySongs", JSON.stringify(mySongs));
   }, [search, mySongs]);
@@ -52,8 +52,19 @@ const SongSearch = () => {
 
   const handleSaveSong = () => {
     alert("Salvando cancion en Favoritos");
+    let currentSong = {
+      search,
+      lyric,
+      bio,
+    };
+    setMySongs((mySongs) => [...mySongs, currentSong]);
+    setSearch(null);
   };
-  const handleDeleteSong = (id) => {};
+
+  const handleDeleteSong = (id) => {
+    alert(`Eliminando canción con el id: ${id}`);
+  };
+
   return (
     <div>
       <HashRouter>
@@ -62,10 +73,9 @@ const SongSearch = () => {
           <Link to="/canciones">Home</Link>
         </header>
         {loading && <Loader />}
-        <article className="grid-1-3">
+        <article className="grid-1-2">
           <Routes>
             <Route
-              exact
               path="/canciones"
               element={
                 <>
@@ -83,11 +93,7 @@ const SongSearch = () => {
                 </>
               }
             />
-            <Route
-              exact
-              path="/canciones/:id"
-              element={<h2>Página de canción</h2>}
-            />
+            <Route path="/canciones/:id" element={<h2>Página de canción</h2>} />
             <Route path="*" element={<Error404 />} />
           </Routes>
         </article>

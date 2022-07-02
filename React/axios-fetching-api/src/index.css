@@ -1,0 +1,52 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+*,
+*:after,
+*::before {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+}
+.App {
+  text-align: center;
+}
+header {
+  background-color: #411222;
+  min-height: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-bottom: 3rem;
+}
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-1-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 2rem;
+}
+@media screen and (min-width: 1024px) {
+  .grid-1-3 {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+  }
+}
+.card {
+  margin: 2rem 0 2rem 0;
+}

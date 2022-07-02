@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const SongTableRow = () => {
+const SongTableRow = ({ id, el, handleDeleteSong }) => {
+  //console.log(el);
+  let navigate = useNavigate();
   return (
     <tr>
       <td>
@@ -9,8 +12,8 @@ const SongTableRow = () => {
       <td>Nombre artista</td>
       <td>Nombre canción</td>
       <td>
-        <button>Ver</button>
-        <button>Eliminar</button>
+        <button onClick={() => navigate(`/canciones/${id}`)}>Ver</button>
+        <button onClick={() => handleDeleteSong(id)}>Eliminar</button>
       </td>
     </tr>
   );

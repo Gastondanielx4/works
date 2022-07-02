@@ -15,7 +15,14 @@ const SongTable = (mySongs, handleDeleteSong) => {
         </thead>
         <tbody>
           {mySongs.length > 0 ? (
-            mySongs.map((el, index) => <SongTableRow key={index} />)
+            mySongs.map((el, index) => (
+              <SongTableRow
+                key={index}
+                el={el}
+                id={index}
+                handleDeleteSong={handleDeleteSong}
+              />
+            ))
           ) : (
             <tr>
               <td colSpan="4">Sin canciones favoritas</td>
