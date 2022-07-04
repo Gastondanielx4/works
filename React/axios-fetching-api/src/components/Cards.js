@@ -4,27 +4,31 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
-const Cards = () => {
+const Cards = ({ name, email, urlImg }) => {
+  const CustomizedButton = styled(Button)`
+    background-color: #752c45;
+    margin-right: 1rem;
+  `;
   return (
-    <div class="card">
+    <div className="card">
       <Card sx={{ maxWidth: 345 }}>
         <CardActionArea>
-          <Photo urlImg="https://reqres.in/img/faces/1-image.jpg" />
+          <Photo urlImg={urlImg} />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Lizard
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+            <Typography gutterBottom variant="h6" component="div">
+              {name}
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
+          <CustomizedButton size="medium" color="primary">
+            <b>Send email</b>
+          </CustomizedButton>
+          <Typography variant="body2" color="text.secondary">
+            {email}
+          </Typography>
         </CardActions>
       </Card>
     </div>

@@ -6,6 +6,7 @@ import SongForm from "./SongForm";
 import { HashRouter, Link, Route, Routes } from "react-router-dom";
 import Error404 from "../pages/Error404";
 import SongTable from "./SongTable";
+import SongPage from "../pages/SongPage";
 
 let mySongsInit = JSON.parse(localStorage.getItem("mySongs")) || [];
 
@@ -57,12 +58,22 @@ const SongSearch = () => {
       lyric,
       bio,
     };
-    setMySongs((mySongs) => [...mySongs, currentSong]);
+    let songs = [...mySongs, currentSong];
+    setMySongs(songs);
     setSearch(null);
+    localStorage.setItem("mySongs", JSON.stringify(songs));
   };
 
   const handleDeleteSong = (id) => {
-    alert(`Eliminando canción con el id: ${id}`);
+    //alert(`Eliminando canción con el id: ${id}`)
+    let isDelete = window.confirm(
+      `¿Estas seguro de eliminar la canción con el id ${id} `
+    );
+    if (isDelete) {
+      let songs = mySongs.filter((el, index) => index !== id);
+      setMySongs(songs);
+      localStorage.setItem("mySongs", JSON.stringify(songs));
+    }
   };
 
   return (
@@ -93,7 +104,10 @@ const SongSearch = () => {
                 </>
               }
             />
-            <Route path="/canciones/:id" element={<h2>Página de canción</h2>} />
+            <Route
+              path="/canciones/:id"
+              element={<SongPage mySongs={mySongs} />}
+            />
             <Route path="*" element={<Error404 />} />
           </Routes>
         </article>

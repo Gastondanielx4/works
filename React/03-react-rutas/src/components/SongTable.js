@@ -1,7 +1,6 @@
-import React from "react";
 import SongTableRow from "./SongTableRow";
 
-const SongTable = (mySongs, handleDeleteSong) => {
+const SongTable = ({ mySongs, handleDeleteSong }) => {
   return (
     <div>
       <h3>Mis Canciones Favoritas</h3>
