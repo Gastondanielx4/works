@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
-import Main from "./MainContext";
+import Main from "./Main";
 
 const initialTheme = "light";
 const initialLanguage = "es";

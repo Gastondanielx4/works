@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
+import LanguageContext from "../context/LanguageContext";
 
-const FooterContext = ({ texts }) => {
+const FooterContext = () => {
   const { theme } = useContext(ThemeContext);
+  const { texts } = useContext(LanguageContext);
 
   return (
-    <div className={theme}>
-      <footer>
-        <h4>{texts.footerTitle}</h4>
-      </footer>
-    </div>
+    <footer className={theme}>
+      <h4>{texts.footerTitle}</h4>
+    </footer>
   );
 };
 
