@@ -1,6 +1,11 @@
-import { TYPES } from "../actions/shoppingActions";
+import {
+  ADD_TO_CART,
+  CLEAR_CART,
+  REMOVE_ALL_FROM_CART,
+  REMOVE_ONE_FROM_CART,
+} from "../types";
 
-export const shoppingInitialState = {
+export const InitialState = {
   products: [
     { id: 1, name: "Producto 1", price: 100 },
     { id: 2, name: "Producto 2", price: 200 },
@@ -12,9 +17,9 @@ export const shoppingInitialState = {
   cart: [],
 };
 
-export function shoppingReducer(state, action) {
+export function shoppingReducer(state = InitialState, action) {
   switch (action.type) {
-    case TYPES.ADD_TO_CART: {
+    case ADD_TO_CART: {
       let newItem = state.products.find(
         (product) => product.id === action.payload
       );
@@ -37,7 +42,7 @@ export function shoppingReducer(state, action) {
           };
     }
 
-    case TYPES.REMOVE_ONE_FROM_CART: {
+    case REMOVE_ONE_FROM_CART: {
       let itemToDelete = state.cart.find((item) => item.id === action.payload);
       return itemToDelete.quantity > 1
         ? {
@@ -54,15 +59,15 @@ export function shoppingReducer(state, action) {
           };
     }
 
-    case TYPES.REMOVE_ALL_FROM_CART: {
+    case REMOVE_ALL_FROM_CART: {
       return {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
       };
     }
 
-    case TYPES.CLEAR_CART:
-      return shoppingInitialState;
+    case CLEAR_CART:
+      return InitialState;
 
     default:
       return state;
