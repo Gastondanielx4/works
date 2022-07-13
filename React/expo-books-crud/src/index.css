@@ -1,0 +1,41 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+*,
+*:after,
+*::before {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+}
+.app {
+  background-color: #eaeaea;
+}
+header {
+  background-color: #3a50af;
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  margin-bottom: 3rem;
+}
+.grid-1-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 2rem;
+}
+@media screen and (min-width: 1024px) {
+  .grid-1-4 {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    justify-items: center;
+  }
+}
