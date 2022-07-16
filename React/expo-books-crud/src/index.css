@@ -2,6 +2,7 @@ html {
   box-sizing: border-box;
   font-size: 16px;
   font-family: sans-serif;
+  background-color: #eaeaea;
 }
 *,
 *:after,
@@ -16,26 +17,83 @@ body {
 }
 header {
   background-color: #3a50af;
-  min-height: 10vh;
+  height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
   color: rgb(255, 255, 255);
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
+
 .grid-1-4 {
   display: grid;
-  grid-template-columns: 1fr;
-  align-items: start;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
   gap: 2rem;
+  /* justify-items: center; */
 }
-@media screen and (min-width: 1024px) {
+main {
+  padding-left: 8rem;
+  padding-bottom: 3rem;
+}
+.div-search {
+  position: relative;
+  width: 18rem;
+}
+.clear-search {
+  position: absolute;
+  top: 50%;
+  height: 18px;
+  width: 18px;
+  right: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.clear-search::before {
+  position: absolute;
+  content: " ";
+  width: 1px;
+  height: 18px;
+  background-color: #999;
+  transform: rotate(45deg);
+}
+.clear-search::after {
+  position: absolute;
+  content: " ";
+  width: 1px;
+  height: 18px;
+  background-color: #999;
+  transform: rotate(315deg);
+}
+
+.div-one-book {
+  display: flex;
+  margin-top: 1.5rem;
+}
+@media screen and (max-width: 1024px) {
   .grid-1-4 {
     display: grid;
-    justify-content: center;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    align-items: center;
-    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 1rem;
     justify-items: center;
+  }
+  main {
+    padding-left: 2rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .grid-1-4 {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 1rem;
+    justify-items: center;
+  }
+  main {
+    padding-left: 1rem;
   }
 }
