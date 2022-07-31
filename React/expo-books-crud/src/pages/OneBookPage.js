@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CrudContext from "../context/CrudContext";
 import { helpHttp } from "../helper/helpHttp";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const CustomizedButton = styled(Button)`
   background-color: #3a51b0;
@@ -13,17 +13,10 @@ const CustomizedButton = styled(Button)`
 `;
 
 export const OneBookPage = () => {
-  /*  const { booksApi } = useContext(CrudContext);
   const [bookOpen, setBookOpen] = useState({});
-  let { id } = useParams();
-  useEffect(() => {
-    if (booksApi !== undefined) {
-      const elBookOpen = booksApi.find((book) => book.id === id);
-      setBookOpen(elBookOpen);
-    }
-  }, []); */
+  let { description, name, excerpt, image, pages } = bookOpen;
+  const [publishDate, setPublishDate] = useState("");
 
-  const [bookOpen, setBookOpen] = useState({});
   let api = helpHttp();
   let navigate = useNavigate();
   let { id } = useParams();
@@ -38,8 +31,21 @@ export const OneBookPage = () => {
   useEffect(() => {
     api.get(url, options).then((res) => {
       if (!res.err) {
-        setBookOpen(res.book);
-        //console.log(bookOpen);
+        let newPublishDate = res.book.publicationDate;
+        let newBook = res.book;
+        setBookOpen(newBook);
+        if (newPublishDate.length > 10) {
+          let date = new Date(newPublishDate);
+          let formatted_date =
+            date.getDate() +
+            "/" +
+            (date.getMonth() + 1) +
+            "/" +
+            date.getFullYear();
+          setPublishDate(formatted_date);
+        } else {
+          setPublishDate(newPublishDate);
+        }
       } else {
         setBookOpen(null);
         //setError(res);
@@ -49,12 +55,10 @@ export const OneBookPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let { description, name, excerpt, image, pages, publicationDate } = bookOpen;
-
   return (
     <main>
       <CustomizedButton onClick={() => navigate(`/`)}>
-        Back to book
+        {<ArrowBackIcon></ArrowBackIcon>} Back to Books
       </CustomizedButton>
       <br />
       <div className="div-one-book">
@@ -63,11 +67,14 @@ export const OneBookPage = () => {
           src={image}
           alt={`Foto de portada del libro: ${name}`}
         />
-        <div>
-          <h2 style={{ marginTop: "3rem" }}>{name}</h2>
+        <div className="info-one-book">
+          <h2 style={{ marginTop: "1rem" }}>{name}</h2>
           <p>{description}</p>
-          <h5>{publicationDate}</h5>
-          <h5>{`${pages} pages`}</h5>
+          <div style={{ display: "flex" }}>
+            <p style={{ marginRight: ".5rem" }}>Publish date:</p>
+            <p style={{ color: "#999" }}>{publishDate}</p>
+          </div>
+          <p style={{ color: "#999" }}>{`${pages} pages`}</p>
         </div>
       </div>
       <br />

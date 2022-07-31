@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import CrudContext from "../context/CrudContext";
 import CardBook from "./CardBook";
 
-const CrudBook = () => {
-  const { booksApi, searchBook } = useContext(CrudContext);
+const RenderBooks = () => {
+  const { booksApi } = useContext(CrudContext);
   return (
     <div className="grid-1-4">
       {booksApi.length > 0 &&
@@ -12,4 +12,4 @@ const CrudBook = () => {
   );
 };
 
-export default CrudBook;
+export default RenderBooks;

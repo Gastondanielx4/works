@@ -1,12 +1,12 @@
 import React from "react";
-import CrudBook from "./CrudBook";
+import RenderBooks from "./RenderBooks";
 import { SearchBook } from "./SearchBook";
 
 export const MainBooks = () => {
   return (
     <main>
       <SearchBook />
-      <CrudBook />
+      <RenderBooks />
     </main>
   );
 };
