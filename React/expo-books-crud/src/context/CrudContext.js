@@ -4,10 +4,12 @@ import { helpHttp } from "../helper/helpHttp";
 
 const CrudContext = createContext();
 
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTdlY2I1YjczODdhMDAxNmY4MGVjMSIsIm5hbWUiOiJtYXRpYXNIZXJlZGlhIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY1OTQ2NDQyNSwiZXhwIjoxNjYxMTkyNDI1fQ.zho-lmxyhbsWJEFPXHdoDkEqwG-n_4zZz5pudRW10yI";
 const CrudProvider = ({ children }) => {
   const [booksApi, setBooksApi] = useState([]);
   const [searchBook, setSearchBook] = useState("");
-  const [response, setResponse] = useState(false);
+  /* const [response, setResponse] = useState(false); */
   const handleSearch = (e) => {
     /* console.log(e.target.value);
     console.log(e.target.name); */
@@ -25,8 +27,7 @@ const CrudProvider = ({ children }) => {
   let url = "https://mern-books-server.herokuapp.com/api/books/";
   let options = {
     headers: {
-      "x-token":
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTdlY2I1YjczODdhMDAxNmY4MGVjMSIsIm5hbWUiOiJtYXRpYXNIZXJlZGlhIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY1NzY1Mjg4OCwiZXhwIjoxNjU5MzgwODg4fQ.gM-5aLqho-upYFyQqgIE9m8HrSD5R6nMDec7pWB0V4k",
+      "x-token": token,
     },
   };
 
@@ -61,12 +62,12 @@ const CrudProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchBook]);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     api.get(url, options).then((res) => {
       let booksWithoutFilter = res.books;
       setBooksApi(booksWithoutFilter);
     });
-  }, [response]);
+  }, [response]); */
 
   let urlPost = "https://mern-books-server.herokuapp.com/api/books/new/";
 
@@ -77,15 +78,18 @@ const CrudProvider = ({ children }) => {
       body: data,
       headers: {
         "content-type": "application/json",
-        "x-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTdlY2I1YjczODdhMDAxNmY4MGVjMSIsIm5hbWUiOiJtYXRpYXNIZXJlZGlhIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY1NzY1Mjg4OCwiZXhwIjoxNjU5MzgwODg4fQ.gM-5aLqho-upYFyQqgIE9m8HrSD5R6nMDec7pWB0V4k",
+        "x-token": token,
       },
     };
 
     api.post(urlPost, options).then((res) => {
       //console.log(res);
       if (!res.err) {
-        setResponse(true);
+        /*  api.get(url, options).then((res) => {
+          let booksWithoutFilter = res.books;
+          setBooksApi(booksWithoutFilter);
+        }); */
+        /*  setResponse(true); */
         /*  setBooksApi([...booksApi, res]); */
       } else {
         // setError(res);
@@ -101,13 +105,14 @@ const CrudProvider = ({ children }) => {
       body: data,
       headers: {
         "x-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTdlY2I1YjczODdhMDAxNmY4MGVjMSIsIm5hbWUiOiJtYXRpYXNIZXJlZGlhIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY1NzY1Mjg4OCwiZXhwIjoxNjU5MzgwODg4fQ.gM-5aLqho-upYFyQqgIE9m8HrSD5R6nMDec7pWB0V4k",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTdlY2I1YjczODdhMDAxNmY4MGVjMSIsIm5hbWUiOiJtYXRpYXNIZXJlZGlhIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY1OTQ2NDQyNSwiZXhwIjoxNjYxMTkyNDI1fQ.zho-lmxyhbsWJEFPXHdoDkEqwG-n_4zZz5pudRW10yI",
       },
     };
 
     api.put(endpoint, options).then((res) => {
       console.log(res);
       if (!res.err) {
+        /*   */
         let newData = booksApi.map((el) => (el.id === data.id ? data : el));
         booksApi(newData);
       } else {
@@ -125,14 +130,17 @@ const CrudProvider = ({ children }) => {
       let options = {
         headers: {
           "content-type": "application/json",
-          "x-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTdlY2I1YjczODdhMDAxNmY4MGVjMSIsIm5hbWUiOiJtYXRpYXNIZXJlZGlhIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY1NzY1Mjg4OCwiZXhwIjoxNjU5MzgwODg4fQ.gM-5aLqho-upYFyQqgIE9m8HrSD5R6nMDec7pWB0V4k",
+          "x-token": token,
         },
       };
 
       api.del(endpoint, options).then((res) => {
         console.log(res);
         if (!res.err) {
+          /* api.get(url, options).then((res) => {
+            let booksWithoutFilter = res.books;
+            setBooksApi(booksWithoutFilter);
+          }); */
           /*  let newData = booksApi.filter((el) => el.id !== id);
           setBooksApi(newData); */
         } else {
