@@ -1,8 +1,9 @@
 import Edit from "@mui/icons-material/Edit";
-import { IconButton, TextField } from "@mui/material";
+import { Button, IconButton, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useModal } from "../hooks/useModal";
 import Modal from "./Modal";
+import SendIcon from "@mui/icons-material/Send";
 
 const Modals = ({ el, publishDate }) => {
   let { name, image, publicationDate, id, description, pages, excerpt } = el;
@@ -23,7 +24,7 @@ const Modals = ({ el, publishDate }) => {
   let initialForm = {
     name,
     image,
-    publicationDate: publishDate,
+    publicationDate,
     description,
     pages,
     excerpt,
@@ -34,99 +35,127 @@ const Modals = ({ el, publishDate }) => {
     openModal1();
   };
 
+  const sendForm = () => {};
   return (
     <div>
       <IconButton el={el} onClick={handleEdit} aria-label="edit">
         <Edit />
       </IconButton>
       <Modal isOpen={isOpenModal1} closeModal={closeModal1}>
-        <div>
-          <div className="div-one-book">
-            <img
-              style={{ height: "21rem", width: "14rem", marginRight: "1rem" }}
-              src={image}
-              alt={`Foto de portada del libro: ${name}`}
-            />
-            <div className="info-one-book">
-              <h4>{name}</h4>
-              <TextField
-                size="small"
-                id="outlined-basic"
-                label="Nombre"
-                variant="outlined"
-                type="text"
-                name="name"
-                focused
-                /* onChange={handleChange} */
-                value={form.name}
+        <form onSubmit={sendForm}>
+          <div>
+            <div className="div-one-book">
+              <img
+                style={{
+                  height: "21rem",
+                  width: "14rem",
+                  marginRight: "1rem",
+                  borderRadius: "7px",
+                }}
+                src={image}
+                alt={`Foto de portada del libro: ${name}`}
               />
-              {/* <p>{description}</p> */}
-              <TextField
-                id="outlined-multiline-static"
-                label="Descripción"
-                name="description"
-                multiline
-                rows={4}
-                focused
-                /* onChange={handleChange} */
-                value={form.description}
-              />
-              <div style={{ display: "flex" }}>
+              <div className="info-one-book">
+                <h4>{name}</h4>
                 <TextField
                   size="small"
                   id="outlined-basic"
-                  label="Fecha de Publicación"
+                  label="Nombre"
                   variant="outlined"
                   type="text"
-                  name="publishDate"
+                  name="name"
+                  style={{ margin: "0.5rem 0" }}
                   focused
-                  /*  onChange={handleChange} */
-                  value={form.publicationDate}
+                  /* onChange={handleChange} */
+                  value={form.name}
                 />
-                {/* <p style={{ marginRight: ".5rem" }}>Publish date:</p>
+                {/* <p>{description}</p> */}
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Descripción"
+                  name="description"
+                  multiline
+                  rows={4}
+                  style={{ margin: "0.5rem 0" }}
+                  focused
+                  /* onChange={handleChange} */
+                  value={form.description}
+                />
+                <div style={{ display: "flex" }}>
+                  <TextField
+                    size="small"
+                    id="outlined-basic"
+                    label="Fecha de Publicación"
+                    variant="outlined"
+                    type="text"
+                    name="publishDate"
+                    style={{ margin: "0.5rem 1rem 0.5rem 0", width: "15rem" }}
+                    focused
+                    /*  onChange={handleChange} */
+                    value={form.publicationDate}
+                  />
+                  {/* <p style={{ marginRight: ".5rem" }}>Publish date:</p>
                 <p style={{ color: "#999" }}>{publishDate}</p> */}
+                  <TextField
+                    size="small"
+                    id="outlined-basic"
+                    label="Páginas"
+                    variant="outlined"
+                    type="text"
+                    name="pages"
+                    style={{ margin: "0.5rem 0" }}
+                    focused
+                    /*  onChange={handleChange} */
+                    value={form.pages}
+                  />
+                </div>
+                {/*  <p style={{ color: "#999" }}>{`${pages} pages`}</p> */}
                 <TextField
                   size="small"
                   id="outlined-basic"
-                  label="Páginas"
+                  label="URL Imagen"
                   variant="outlined"
                   type="text"
-                  name="pages"
+                  name="image"
+                  style={{ margin: "0.5rem 0" }}
                   focused
-                  /*  onChange={handleChange} */
-                  value={form.pages}
+                  /* onChange={handleChange} */
+                  value={form.image}
                 />
               </div>
-              {/*  <p style={{ color: "#999" }}>{`${pages} pages`}</p> */}
+            </div>
+            <div
+            /* style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-around",
+              }} */
+            >
               <TextField
-                size="small"
-                id="outlined-basic"
-                label="URL Imagen"
-                variant="outlined"
-                type="text"
-                name="image"
-                focused
+                id="outlined-multiline-static"
+                label="Excerpt"
+                name="excerpt"
+                multiline
+                rows={12}
+                style={{ width: "100%", margin: "1rem 0" }}
                 /* onChange={handleChange} */
-                value={form.image}
+                defaultValue={form.excerpt}
+                focused
               />
+
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  value="Enviar"
+                  endIcon={<SendIcon />}
+                >
+                  Send
+                </Button>
+              </div>
             </div>
           </div>
-          <br />
-          <TextField
-            id="outlined-multiline-static"
-            label="Excerpt"
-            name="excerpt"
-            multiline
-            rows={6}
-            /* onChange={handleChange} */
-            defaultValue={form.excerpt}
-          />
-        </div>
-        <input
-          type="submit"
-          value="Enviar"
-          style={{ maxWidth: "20rem", margin: "0 auto" }}
-        />
+        </form>
       </Modal>
     </div>
   );

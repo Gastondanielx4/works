@@ -4,70 +4,77 @@ import { helpHttp } from "../helper/helpHttp";
 
 const CrudContext = createContext();
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTdlY2I1YjczODdhMDAxNmY4MGVjMSIsIm5hbWUiOiJtYXRpYXNIZXJlZGlhIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY1OTQ2NDQyNSwiZXhwIjoxNjYxMTkyNDI1fQ.zho-lmxyhbsWJEFPXHdoDkEqwG-n_4zZz5pudRW10yI";
 const CrudProvider = ({ children }) => {
   const [booksApi, setBooksApi] = useState([]);
   const [searchBook, setSearchBook] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   /* const [response, setResponse] = useState(false); */
   const handleSearch = (e) => {
-    /* console.log(e.target.value);
-    console.log(e.target.name); */
     setSearchBook(e.target.value);
   };
   const handleResetFilter = () => {
     setSearchBook("");
   };
 
-  /*   const [dataToEdit, setDataToEdit] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false); */
-
+  /*  const [dataToEdit, setDataToEdit] = useState(null); */
   let api = helpHttp();
   let url = "https://mern-books-server.herokuapp.com/api/books/";
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTdlY2I1YjczODdhMDAxNmY4MGVjMSIsIm5hbWUiOiJtYXRpYXNIZXJlZGlhIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY1OTQ2NDQyNSwiZXhwIjoxNjYxMTkyNDI1fQ.zho-lmxyhbsWJEFPXHdoDkEqwG-n_4zZz5pudRW10yI";
   let options = {
     headers: {
       "x-token": token,
     },
   };
 
-  useEffect(() => {
-    //setLoading(true); if (booksApi.length === 0)
+  const apiGet = () => {
     api.get(url, options).then((res) => {
       //console.log(res);
       if (!res.err) {
         let booksWithoutFilter = res.books;
-        const booksFilter = booksWithoutFilter
-          .filter((el) => {
-            if (searchBook === "") {
-              return el;
-            } else if (
-              el.name.toLowerCase().includes(searchBook.toLowerCase()) ||
-              el.description.toLowerCase().includes(searchBook.toLowerCase())
-            ) {
-              return el;
-            }
-          })
-          .map((el) => {
-            return el;
-          });
-        setBooksApi(booksFilter);
-        //setError(null);
+        setBooksApi(booksWithoutFilter);
+        setError(null);
       } else {
         setBooksApi("");
-        //setError(res);
+        setError(res);
       }
-      //setLoading(false);
+      setLoading(false);
     });
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    if (booksApi.length === 0) {
+      api.get(url, options).then((res) => {
+        //console.log(res);
+        if (!res.err) {
+          let booksWithoutFilter = res.books;
+          const booksFilter = booksWithoutFilter
+            .filter((el) => {
+              if (searchBook === "") {
+                return el;
+              } else if (
+                el.name.toLowerCase().includes(searchBook.toLowerCase()) ||
+                el.description.toLowerCase().includes(searchBook.toLowerCase())
+              ) {
+                return el;
+              }
+            })
+            .map((el) => {
+              return el;
+            });
+          setBooksApi(booksFilter);
+          setError(null);
+        } else {
+          setBooksApi("");
+          setError(res);
+        }
+        setLoading(false);
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchBook]);
-
-  /*  useEffect(() => {
-    api.get(url, options).then((res) => {
-      let booksWithoutFilter = res.books;
-      setBooksApi(booksWithoutFilter);
-    });
-  }, [response]); */
 
   let urlPost = "https://mern-books-server.herokuapp.com/api/books/new/";
 
@@ -85,6 +92,15 @@ const CrudProvider = ({ children }) => {
     api.post(urlPost, options).then((res) => {
       //console.log(res);
       if (!res.err) {
+        apiGet();
+        /* api.get(url, options).then((res) => {
+          //console.log(res);
+          if (!res.err) {
+            let booksWithoutFilter = res.books;
+            setSearchBook("");
+            setBooksApi(booksWithoutFilter);
+          }
+        }); */
         /*  api.get(url, options).then((res) => {
           let booksWithoutFilter = res.books;
           setBooksApi(booksWithoutFilter);
@@ -104,15 +120,14 @@ const CrudProvider = ({ children }) => {
     let options = {
       body: data,
       headers: {
-        "x-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTdlY2I1YjczODdhMDAxNmY4MGVjMSIsIm5hbWUiOiJtYXRpYXNIZXJlZGlhIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY1OTQ2NDQyNSwiZXhwIjoxNjYxMTkyNDI1fQ.zho-lmxyhbsWJEFPXHdoDkEqwG-n_4zZz5pudRW10yI",
+        "x-token": token,
       },
     };
 
     api.put(endpoint, options).then((res) => {
       console.log(res);
       if (!res.err) {
-        /*   */
+        apiGet();
         let newData = booksApi.map((el) => (el.id === data.id ? data : el));
         booksApi(newData);
       } else {
@@ -137,10 +152,7 @@ const CrudProvider = ({ children }) => {
       api.del(endpoint, options).then((res) => {
         console.log(res);
         if (!res.err) {
-          /* api.get(url, options).then((res) => {
-            let booksWithoutFilter = res.books;
-            setBooksApi(booksWithoutFilter);
-          }); */
+          apiGet();
           /*  let newData = booksApi.filter((el) => el.id !== id);
           setBooksApi(newData); */
         } else {
@@ -160,8 +172,8 @@ const CrudProvider = ({ children }) => {
     deleteData,
     handleResetFilter,
     updateData,
-    //error,
-    //loading,
+    error,
+    loading,
     //createData,
     //dataToEdit,
     //setDataToEdit,
