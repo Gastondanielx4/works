@@ -1,6 +1,7 @@
 /* eslint-disable array-callback-return */
 import { createContext, useEffect, useState } from "react";
 import { helpHttp } from "../helper/helpHttp";
+import { token } from "../helper/token";
 
 const CrudContext = createContext();
 
@@ -9,7 +10,7 @@ const CrudProvider = ({ children }) => {
   const [searchBook, setSearchBook] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  /* const [response, setResponse] = useState(false); */
+
   const handleSearch = (e) => {
     setSearchBook(e.target.value);
   };
@@ -20,14 +21,11 @@ const CrudProvider = ({ children }) => {
   /*  const [dataToEdit, setDataToEdit] = useState(null); */
   let api = helpHttp();
   let url = "https://mern-books-server.herokuapp.com/api/books/";
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTdlY2I1YjczODdhMDAxNmY4MGVjMSIsIm5hbWUiOiJtYXRpYXNIZXJlZGlhIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY1OTQ2NDQyNSwiZXhwIjoxNjYxMTkyNDI1fQ.zho-lmxyhbsWJEFPXHdoDkEqwG-n_4zZz5pudRW10yI";
   let options = {
     headers: {
       "x-token": token,
     },
   };
-
   const apiGet = () => {
     api.get(url, options).then((res) => {
       //console.log(res);
@@ -108,13 +106,13 @@ const CrudProvider = ({ children }) => {
         /*  setResponse(true); */
         /*  setBooksApi([...booksApi, res]); */
       } else {
-        // setError(res);
+        setError(res);
       }
     });
   };
 
-  const updateData = (data) => {
-    let endpoint = `${url}/${data.id}`;
+  const updateData = (data, id) => {
+    let endpoint = `${url}/${id}`;
     //console.log(endpoint);
 
     let options = {
@@ -131,7 +129,7 @@ const CrudProvider = ({ children }) => {
         let newData = booksApi.map((el) => (el.id === data.id ? data : el));
         booksApi(newData);
       } else {
-        //setError(res);
+        setError(res);
       }
     });
   };
@@ -156,7 +154,7 @@ const CrudProvider = ({ children }) => {
           /*  let newData = booksApi.filter((el) => el.id !== id);
           setBooksApi(newData); */
         } else {
-          //setError(res);
+          setError(res);
         }
       });
     } else {

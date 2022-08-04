@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { token } from "../helper/token";
 
 const CustomizedButton = styled(Button)`
   background-color: #3a51b0;
@@ -23,8 +24,7 @@ export const OneBookPage = () => {
   let url = `https://mern-books-server.herokuapp.com/api/books/${id}`;
   let options = {
     headers: {
-      "x-token":
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTdlY2I1YjczODdhMDAxNmY4MGVjMSIsIm5hbWUiOiJtYXRpYXNIZXJlZGlhIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY1NzY1Mjg4OCwiZXhwIjoxNjU5MzgwODg4fQ.gM-5aLqho-upYFyQqgIE9m8HrSD5R6nMDec7pWB0V4k",
+      "x-token": token,
     },
   };
 

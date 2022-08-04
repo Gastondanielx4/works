@@ -1,12 +1,15 @@
 import Edit from "@mui/icons-material/Edit";
 import { Button, IconButton, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useModal } from "../hooks/useModal";
 import Modal from "./Modal";
 import SendIcon from "@mui/icons-material/Send";
+import CrudContext from "../context/CrudContext";
 
-const Modals = ({ el, publishDate }) => {
+const Modals = ({ el }) => {
   let { name, image, publicationDate, id, description, pages, excerpt } = el;
+  const { updateDate } = useContext(CrudContext);
+
   /*  const [publishDate, setPublishDate] = useState("");
   useEffect(() => {
     if (publicationDate.length > 10) {
@@ -23,19 +26,26 @@ const Modals = ({ el, publishDate }) => {
   }, []); */
   let initialForm = {
     name,
-    image,
-    publicationDate,
     description,
     pages,
+    publicationDate,
     excerpt,
+    image,
   };
   const [isOpenModal1, openModal1, closeModal1] = useModal(false);
   const [form, setForm] = useState(initialForm);
   const handleEdit = () => {
     openModal1();
   };
-
-  const sendForm = () => {};
+  const sendForm = () => {
+    updateDate(form, id);
+  };
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     <div>
       <IconButton el={el} onClick={handleEdit} aria-label="edit">
@@ -66,8 +76,8 @@ const Modals = ({ el, publishDate }) => {
                   name="name"
                   style={{ margin: "0.5rem 0" }}
                   focused
-                  /* onChange={handleChange} */
-                  value={form.name}
+                  onChange={handleChange}
+                  defaultValue={form.name}
                 />
                 {/* <p>{description}</p> */}
                 <TextField
@@ -78,8 +88,8 @@ const Modals = ({ el, publishDate }) => {
                   rows={4}
                   style={{ margin: "0.5rem 0" }}
                   focused
-                  /* onChange={handleChange} */
-                  value={form.description}
+                  onChange={handleChange}
+                  defaultValue={form.description}
                 />
                 <div style={{ display: "flex" }}>
                   <TextField
@@ -91,8 +101,8 @@ const Modals = ({ el, publishDate }) => {
                     name="publishDate"
                     style={{ margin: "0.5rem 1rem 0.5rem 0", width: "15rem" }}
                     focused
-                    /*  onChange={handleChange} */
-                    value={form.publicationDate}
+                    onChange={handleChange}
+                    defaultValue={form.publicationDate}
                   />
                   {/* <p style={{ marginRight: ".5rem" }}>Publish date:</p>
                 <p style={{ color: "#999" }}>{publishDate}</p> */}
@@ -105,8 +115,9 @@ const Modals = ({ el, publishDate }) => {
                     name="pages"
                     style={{ margin: "0.5rem 0" }}
                     focused
-                    /*  onChange={handleChange} */
-                    value={form.pages}
+                    onChange={handleChange}
+                    defaultValue={form.pages}
+                    /* value={form.pages} */
                   />
                 </div>
                 {/*  <p style={{ color: "#999" }}>{`${pages} pages`}</p> */}
@@ -119,8 +130,8 @@ const Modals = ({ el, publishDate }) => {
                   name="image"
                   style={{ margin: "0.5rem 0" }}
                   focused
-                  /* onChange={handleChange} */
-                  value={form.image}
+                  onChange={handleChange}
+                  defaultValue={form.image}
                 />
               </div>
             </div>
@@ -138,7 +149,7 @@ const Modals = ({ el, publishDate }) => {
                 multiline
                 rows={12}
                 style={{ width: "100%", margin: "1rem 0" }}
-                /* onChange={handleChange} */
+                onChange={handleChange}
                 defaultValue={form.excerpt}
                 focused
               />
@@ -150,7 +161,7 @@ const Modals = ({ el, publishDate }) => {
                   value="Enviar"
                   endIcon={<SendIcon />}
                 >
-                  Send
+                  Enviar
                 </Button>
               </div>
             </div>

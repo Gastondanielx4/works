@@ -29,7 +29,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export const TableRowBook = ({ el }) => {
   let { name, image, publicationDate, id } = el;
-  const { deleteData, updateData } = useContext(CrudContext);
+  const { deleteData } = useContext(CrudContext);
   const [publishDate, setPublishDate] = useState("");
 
   useEffect(() => {
@@ -46,9 +46,6 @@ export const TableRowBook = ({ el }) => {
 
   const handleDelete = () => {
     deleteData(id);
-  };
-  const handleEdit = () => {
-    updateData(id);
   };
 
   return (
