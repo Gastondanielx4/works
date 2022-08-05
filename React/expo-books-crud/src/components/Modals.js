@@ -9,21 +9,6 @@ import CrudContext from "../context/CrudContext";
 const Modals = ({ el }) => {
   let { name, image, publicationDate, id, description, pages, excerpt } = el;
   const { updateDate } = useContext(CrudContext);
-
-  /*  const [publishDate, setPublishDate] = useState("");
-  useEffect(() => {
-    if (publicationDate.length > 10) {
-      let date = new Date(publicationDate);
-      let formatted_date =
-        date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-      setPublishDate(formatted_date);
-      setForm({ ...form, [publicationDate]: publishDate });
-    }
-    if (publicationDate.length <= 10) {
-      setPublishDate(publicationDate);
-      setForm({ ...form, [publicationDate]: publishDate });
-    }
-  }, []); */
   let initialForm = {
     name,
     description,
@@ -79,7 +64,6 @@ const Modals = ({ el }) => {
                   onChange={handleChange}
                   defaultValue={form.name}
                 />
-                {/* <p>{description}</p> */}
                 <TextField
                   id="outlined-multiline-static"
                   label="Descripción"
@@ -104,8 +88,6 @@ const Modals = ({ el }) => {
                     onChange={handleChange}
                     defaultValue={form.publicationDate}
                   />
-                  {/* <p style={{ marginRight: ".5rem" }}>Publish date:</p>
-                <p style={{ color: "#999" }}>{publishDate}</p> */}
                   <TextField
                     size="small"
                     id="outlined-basic"
@@ -117,10 +99,8 @@ const Modals = ({ el }) => {
                     focused
                     onChange={handleChange}
                     defaultValue={form.pages}
-                    /* value={form.pages} */
                   />
                 </div>
-                {/*  <p style={{ color: "#999" }}>{`${pages} pages`}</p> */}
                 <TextField
                   size="small"
                   id="outlined-basic"
@@ -135,13 +115,7 @@ const Modals = ({ el }) => {
                 />
               </div>
             </div>
-            <div
-            /* style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-around",
-              }} */
-            >
+            <div>
               <TextField
                 id="outlined-multiline-static"
                 label="Excerpt"
@@ -153,7 +127,6 @@ const Modals = ({ el }) => {
                 defaultValue={form.excerpt}
                 focused
               />
-
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
                   variant="contained"

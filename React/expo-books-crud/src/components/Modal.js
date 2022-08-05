@@ -15,7 +15,6 @@ const Modal = ({ children, isOpen, closeModal }) => {
         >
           Cerrar
         </Button>
-
         {children}
       </div>
     </article>

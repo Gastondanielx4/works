@@ -91,20 +91,6 @@ const CrudProvider = ({ children }) => {
       //console.log(res);
       if (!res.err) {
         apiGet();
-        /* api.get(url, options).then((res) => {
-          //console.log(res);
-          if (!res.err) {
-            let booksWithoutFilter = res.books;
-            setSearchBook("");
-            setBooksApi(booksWithoutFilter);
-          }
-        }); */
-        /*  api.get(url, options).then((res) => {
-          let booksWithoutFilter = res.books;
-          setBooksApi(booksWithoutFilter);
-        }); */
-        /*  setResponse(true); */
-        /*  setBooksApi([...booksApi, res]); */
       } else {
         setError(res);
       }
@@ -113,7 +99,6 @@ const CrudProvider = ({ children }) => {
 
   const updateData = (data, id) => {
     let endpoint = `${url}/${id}`;
-    //console.log(endpoint);
 
     let options = {
       body: data,
@@ -172,10 +157,8 @@ const CrudProvider = ({ children }) => {
     updateData,
     error,
     loading,
-    //createData,
     //dataToEdit,
     //setDataToEdit,
-    //deleteData, */
   };
   return <CrudContext.Provider value={data}>{children}</CrudContext.Provider>;
 };
