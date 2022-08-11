@@ -103,7 +103,7 @@ export const FormCreateBook = () => {
         />
         <input
           type="submit"
-          value="Enviar"
+          value="Send"
           style={{ maxWidth: "20rem", margin: "0 auto" }}
         />
       </form>
