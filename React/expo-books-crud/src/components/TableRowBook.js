@@ -42,6 +42,7 @@ export const TableRowBook = ({ el }) => {
     if (publicationDate.length <= 10) {
       setPublishDate(publicationDate);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDelete = () => {
