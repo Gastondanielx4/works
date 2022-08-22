@@ -10,6 +10,9 @@ const CrudProvider = ({ children }) => {
   const [searchBook, setSearchBook] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [alertOk, setAlertOk] = useState(false);
+  const [contentAlert, setContentAlert] = useState({});
+  const [isDelete, setIsDelete] = useState(null);
 
   const handleSearch = (e) => {
     setSearchBook(e.target.value);
@@ -17,7 +20,9 @@ const CrudProvider = ({ children }) => {
   const handleResetFilter = () => {
     setSearchBook("");
   };
-
+  const handleDelete = (confirm) => {
+    setIsDelete(confirm);
+  };
   let api = helpHttp();
   let url = "https://mern-books-server.herokuapp.com/api/books/";
   let options = {
@@ -84,6 +89,12 @@ const CrudProvider = ({ children }) => {
     api.post(urlPost, options).then((res) => {
       if (!res.err) {
         apiGet();
+        setContentAlert({
+          title: "Book added!",
+          icon: "success",
+          type: "show",
+        });
+        setAlertOk(true);
       } else {
         setError(res);
       }
@@ -104,6 +115,12 @@ const CrudProvider = ({ children }) => {
     api.put(endpoint, options).then((res) => {
       if (!res.err) {
         apiGet();
+        setContentAlert({
+          title: "Book updated!",
+          icon: "success",
+          type: "show",
+        });
+        setAlertOk(true);
       } else {
         setError(res);
       }
@@ -111,10 +128,13 @@ const CrudProvider = ({ children }) => {
   };
 
   const deleteData = (id) => {
-    let isDelete = window.confirm(
-      `Estas Seguro de eliminar el registro con el id ${id}`
-    );
-    if (isDelete) {
+    setContentAlert({
+      title: { id },
+      icon: "",
+      type: "confirm",
+    });
+    setAlertOk(true);
+    if (isDelete === true) {
       let endpoint = `${url}/${id}`;
       let options = {
         headers: {
@@ -146,6 +166,11 @@ const CrudProvider = ({ children }) => {
     updateData,
     error,
     loading,
+    alertOk,
+    setAlertOk,
+    contentAlert,
+    setIsDelete,
+    handleDelete,
   };
   return <CrudContext.Provider value={data}>{children}</CrudContext.Provider>;
 };

@@ -5,6 +5,7 @@ import { useModal } from "../hooks/useModal";
 import Modal from "./Modal";
 import SendIcon from "@mui/icons-material/Send";
 import CrudContext from "../context/CrudContext";
+import validationsForm from "../helper/FormsValidationsEdit";
 
 const Modals = ({ el }) => {
   let { name, image, publicationDate, id, description, pages, excerpt } = el;
@@ -19,6 +20,7 @@ const Modals = ({ el }) => {
   };
   const [isOpenModal1, openModal1, closeModal1] = useModal(false);
   const [form, setForm] = useState(initialForm);
+  const [errors, setErrors] = useState({});
   const handleEdit = () => {
     openModal1();
   };
@@ -32,6 +34,10 @@ const Modals = ({ el }) => {
       ...form,
       [e.target.name]: e.target.value,
     });
+  };
+  const handleBlur = (e) => {
+    handleChange(e);
+    setErrors(validationsForm(form));
   };
   return (
     <div>
@@ -55,8 +61,9 @@ const Modals = ({ el }) => {
               <div className="info-one-book">
                 <h4>{name}</h4>
                 <TextField
+                  error={errors.name}
                   size="small"
-                  id="outlined-basic"
+                  id="outlined-error-helper-text"
                   label="Name"
                   variant="outlined"
                   type="text"
@@ -64,9 +71,13 @@ const Modals = ({ el }) => {
                   style={{ margin: "0.5rem 0" }}
                   focused
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   defaultValue={form.name}
+                  required
+                  helperText={errors.name}
                 />
                 <TextField
+                  error={errors.description}
                   id="outlined-multiline-static"
                   label="Description"
                   name="description"
@@ -75,22 +86,30 @@ const Modals = ({ el }) => {
                   style={{ margin: "0.5rem 0" }}
                   focused
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   defaultValue={form.description}
+                  required
+                  helperText={errors.description}
                 />
                 <div style={{ display: "flex" }}>
                   <TextField
+                    error={errors.publicationDate}
                     size="small"
                     id="outlined-basic"
-                    label="Publication Date"
+                    label="Publication Date (dd/mm/yyyy)"
                     variant="outlined"
                     type="text"
                     name="publicationDate"
                     style={{ margin: "0.5rem 1rem 0.5rem 0", width: "15rem" }}
                     focused
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     defaultValue={form.publicationDate}
+                    required
+                    helperText={errors.publicationDate}
                   />
                   <TextField
+                    error={errors.pages}
                     size="small"
                     id="outlined-basic"
                     label="Pages"
@@ -100,10 +119,14 @@ const Modals = ({ el }) => {
                     style={{ margin: "0.5rem 0" }}
                     focused
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     defaultValue={form.pages}
+                    required
+                    helperText={errors.pages}
                   />
                 </div>
                 <TextField
+                  error={errors.image}
                   size="small"
                   id="outlined-basic"
                   label="URL Image"
@@ -113,12 +136,16 @@ const Modals = ({ el }) => {
                   style={{ margin: "0.5rem 0" }}
                   focused
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   defaultValue={form.image}
+                  required
+                  helperText={errors.image}
                 />
               </div>
             </div>
             <div>
               <TextField
+                error={errors.excerpt}
                 id="outlined-multiline-static"
                 label="Excerpt"
                 name="excerpt"
@@ -126,8 +153,11 @@ const Modals = ({ el }) => {
                 rows={12}
                 style={{ width: "100%", margin: "1rem 0" }}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 defaultValue={form.excerpt}
                 focused
+                required
+                helperText={errors.excerpt}
               />
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
