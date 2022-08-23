@@ -1,29 +1,52 @@
 import Edit from "@mui/icons-material/Edit";
 import { Button, IconButton, TextField } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useModal } from "../hooks/useModal";
 import Modal from "./Modal";
 import SendIcon from "@mui/icons-material/Send";
 import CrudContext from "../context/CrudContext";
 import validationsForm from "../helper/FormsValidationsEdit";
 
-const Modals = ({ el }) => {
+const initialForm = {
+  name: "",
+  description: "",
+  pages: "",
+  publicationDate: "",
+  excerpt: "",
+  image: "",
+};
+const ButtonEditOpenModal = ({ el }) => {
   let { name, image, publicationDate, id, description, pages, excerpt } = el;
   const { updateData } = useContext(CrudContext);
-  let initialForm = {
+  initialForm.name = name;
+  initialForm.description = description;
+  initialForm.pages = pages;
+  initialForm.publicationDate = publicationDate;
+  initialForm.excerpt = excerpt;
+  initialForm.image = image;
+
+  /* initialForm = {
     name,
     description,
     pages,
     publicationDate,
     excerpt,
     image,
-  };
+  }; */
   const [isOpenModal1, openModal1, closeModal1] = useModal(false);
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const handleEdit = () => {
     openModal1();
   };
+
+  useEffect(() => {
+    setErrors(validationsForm(form));
+  }, [form]);
+
+  /*  const handleBlur = (e) => {
+    setErrors(validationsForm(form));
+  }; */
   const sendForm = (e) => {
     e.preventDefault();
     updateData(form, id);
@@ -35,10 +58,7 @@ const Modals = ({ el }) => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleBlur = (e) => {
-    handleChange(e);
-    setErrors(validationsForm(form));
-  };
+
   return (
     <div>
       <IconButton el={el} onClick={handleEdit} aria-label="edit">
@@ -69,9 +89,8 @@ const Modals = ({ el }) => {
                   type="text"
                   name="name"
                   style={{ margin: "0.5rem 0" }}
-                  focused
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  //onBlur={handleBlur}
                   defaultValue={form.name}
                   required
                   helperText={errors.name}
@@ -84,9 +103,8 @@ const Modals = ({ el }) => {
                   multiline
                   rows={4}
                   style={{ margin: "0.5rem 0" }}
-                  focused
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  // onBlur={handleBlur}
                   defaultValue={form.description}
                   required
                   helperText={errors.description}
@@ -101,9 +119,8 @@ const Modals = ({ el }) => {
                     type="text"
                     name="publicationDate"
                     style={{ margin: "0.5rem 1rem 0.5rem 0", width: "15rem" }}
-                    focused
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    //onBlur={handleBlur}
                     defaultValue={form.publicationDate}
                     required
                     helperText={errors.publicationDate}
@@ -111,15 +128,14 @@ const Modals = ({ el }) => {
                   <TextField
                     error={errors.pages}
                     size="small"
-                    id="outlined-basic"
+                    id="outlined-error-helper-text"
                     label="Pages"
                     variant="outlined"
                     type="text"
                     name="pages"
                     style={{ margin: "0.5rem 0" }}
-                    focused
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    //onBlur={handleBlur}
                     defaultValue={form.pages}
                     required
                     helperText={errors.pages}
@@ -134,10 +150,9 @@ const Modals = ({ el }) => {
                   type="text"
                   name="image"
                   style={{ margin: "0.5rem 0" }}
-                  focused
                   onChange={handleChange}
-                  onBlur={handleBlur}
-                  defaultValue={form.image}
+                  //onBlur={handleBlur}
+                  value={form.image}
                   required
                   helperText={errors.image}
                 />
@@ -153,9 +168,8 @@ const Modals = ({ el }) => {
                 rows={12}
                 style={{ width: "100%", margin: "1rem 0" }}
                 onChange={handleChange}
-                onBlur={handleBlur}
+                //onBlur={handleBlur}
                 defaultValue={form.excerpt}
-                focused
                 required
                 helperText={errors.excerpt}
               />
@@ -177,4 +191,4 @@ const Modals = ({ el }) => {
   );
 };
 
-export default Modals;
+export default ButtonEditOpenModal;

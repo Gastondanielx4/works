@@ -144,7 +144,6 @@ const CrudProvider = ({ children }) => {
       };
 
       api.del(endpoint, options).then((res) => {
-        console.log(res);
         if (!res.err) {
           apiGet();
         } else {
