@@ -21,7 +21,25 @@ const CrudProvider = ({ children }) => {
     setSearchBook("");
   };
   const handleDelete = (confirm) => {
-    setIsDelete(confirm);
+    if (confirm) {
+      let endpoint = `${url}/${isDelete}`;
+      let options = {
+        headers: {
+          "content-type": "application/json",
+          "x-token": token,
+        },
+      };
+
+      api.del(endpoint, options).then((res) => {
+        if (!res.err) {
+          apiGet();
+        } else {
+          setError(res);
+        }
+      });
+    } else {
+      return;
+    }
   };
   let api = helpHttp();
   let url = "https://mern-books-server.herokuapp.com/api/books/";
@@ -129,30 +147,12 @@ const CrudProvider = ({ children }) => {
 
   const deleteData = (id) => {
     setContentAlert({
-      title: { id },
+      title: id,
       icon: "",
       type: "confirm",
     });
     setAlertOk(true);
-    if (isDelete === true) {
-      let endpoint = `${url}/${id}`;
-      let options = {
-        headers: {
-          "content-type": "application/json",
-          "x-token": token,
-        },
-      };
-
-      api.del(endpoint, options).then((res) => {
-        if (!res.err) {
-          apiGet();
-        } else {
-          setError(res);
-        }
-      });
-    } else {
-      return;
-    }
+    setIsDelete(id);
   };
   const data = {
     booksApi,

@@ -17,7 +17,7 @@ export const AlertOk = () => {
   }
   if (type === "confirm") {
     Swal.fire({
-      title: "Are you sure?",
+      title: `Are you sure to delete ${title}`,
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,

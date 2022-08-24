@@ -22,6 +22,7 @@ const validationsForm = (form) => {
   if (form.pages.length > 0 && !regexPages.test(form.pages.trim())) {
     errors.pages = "Only numbers and 7 digits maximum ";
   }
+
   if (
     form.publicationDate.length > 0 &&
     !regexDate.test(form.publicationDate.trim())
