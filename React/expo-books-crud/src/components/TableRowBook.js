@@ -46,7 +46,7 @@ export const TableRowBook = ({ el }) => {
   }, []);
 
   const handleDelete = () => {
-    deleteData(id);
+    deleteData(id, name);
   };
 
   return (

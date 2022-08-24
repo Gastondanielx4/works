@@ -145,9 +145,9 @@ const CrudProvider = ({ children }) => {
     });
   };
 
-  const deleteData = (id) => {
+  const deleteData = (id, name) => {
     setContentAlert({
-      title: id,
+      title: name,
       icon: "",
       type: "confirm",
     });
