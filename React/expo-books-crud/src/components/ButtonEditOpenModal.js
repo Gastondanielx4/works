@@ -5,7 +5,7 @@ import { useModal } from "../hooks/useModal";
 import Modal from "./Modal";
 import SendIcon from "@mui/icons-material/Send";
 import CrudContext from "../context/CrudContext";
-import validationsForm from "../helper/FormsValidationsEdit";
+import validationsForm from "../helper/FormsValidations";
 
 const initialForm = {
   name: "",
