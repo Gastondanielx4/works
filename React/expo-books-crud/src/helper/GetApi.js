@@ -1,21 +1,19 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { useContext } from "react";
-import CrudContext from "../context/CrudContext";
-import { helpHttp } from "./helpHttp";
+/* import { helpHttp } from "../helper/helpHttp";
 
-export const apiGet = (url, options) => {
-  const { setBooksApi, setError, setLoading } = useContext(CrudContext);
+export const apiGet = (url, options, setArray, setError, setLoading) => {
   helpHttp()
     .get(url, options)
     .then((res) => {
       if (!res.err) {
-        let booksWithoutFilter = res.books;
-        setBooksApi(booksWithoutFilter);
+        let arrayWithoutFilter = res.books;
+        setArray(arrayWithoutFilter);
         setError(null);
+        return;
       } else {
-        setBooksApi("");
+        setArray("");
         setError(res);
       }
       setLoading(false);
     });
 };
+ */

@@ -18,7 +18,7 @@ const CustomIconButton = styled(IconButton)`
   border: 5px solid #3a50af;
 `;
 export const SearchBook = () => {
-  const { handleSearch, handleResetFilter } = useContext(CrudContext);
+  const { handleSearch } = useContext(CrudContext);
   let navigate = useNavigate();
 
   return (
@@ -36,7 +36,6 @@ export const SearchBook = () => {
       <CustomIconButton
         onClick={() => {
           navigate(`/edit`);
-          handleResetFilter();
         }}
       >
         <Edit fontSize="inherit" />

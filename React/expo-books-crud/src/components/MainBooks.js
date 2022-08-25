@@ -6,7 +6,7 @@ import Message from "./Message";
 import CrudContext from "../context/CrudContext";
 
 export const MainBooks = () => {
-  const { loading, error, setBooksApi } = useContext(CrudContext);
+  const { loading, error } = useContext(CrudContext);
 
   return (
     <main>

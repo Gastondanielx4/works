@@ -8,7 +8,6 @@ const CrudContext = createContext();
 const CrudProvider = ({ children }) => {
   const [booksApi, setBooksApi] = useState([]);
   const [booksFilter, setBooksFilter] = useState([]);
-  const [searchBook, setSearchBook] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [alertOk, setAlertOk] = useState(false);
@@ -16,12 +15,29 @@ const CrudProvider = ({ children }) => {
   const [isDelete, setIsDelete] = useState(null);
 
   const handleSearch = (e) => {
-    setSearchBook(e.target.value);
-    search();
+    search(e.target.value);
   };
-  const handleResetFilter = () => {
+  const search = (searchBooks) => {
+    const booksWithFilter = booksApi
+      .filter((el) => {
+        if (searchBooks === "") {
+          return el;
+        } else if (
+          el.name.toLowerCase().includes(searchBooks.toLowerCase()) ||
+          el.description.toLowerCase().includes(searchBooks.toLowerCase())
+        ) {
+          return el;
+        }
+      })
+      .map((el) => {
+        return el;
+      });
+    setBooksFilter(booksWithFilter);
+  };
+
+  /* const handleResetFilter = () => {
     setSearchBook("");
-  };
+  }; */
   const handleDelete = (confirm) => {
     if (confirm) {
       let endpoint = `${url}/${isDelete}`;
@@ -65,25 +81,8 @@ const CrudProvider = ({ children }) => {
   };
   useEffect(() => {
     apiGet();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const search = () => {
-    const booksWithFilter = booksApi
-      .filter((el) => {
-        if (searchBook === "") {
-          return el;
-        } else if (
-          el.name.toLowerCase().includes(searchBook.toLowerCase()) ||
-          el.description.toLowerCase().includes(searchBook.toLowerCase())
-        ) {
-          return el;
-        }
-      })
-      .map((el) => {
-        return el;
-      });
-    setBooksFilter(booksWithFilter);
-  };
 
   let urlPost = "https://mern-books-server.herokuapp.com/api/books/new/";
 
@@ -149,11 +148,9 @@ const CrudProvider = ({ children }) => {
   const data = {
     booksApi,
     handleSearch,
-    searchBook,
     addBook,
     setBooksApi,
     deleteData,
-    handleResetFilter,
     updateData,
     error,
     loading,
