@@ -7,6 +7,7 @@ const CrudContext = createContext();
 
 const CrudProvider = ({ children }) => {
   const [booksApi, setBooksApi] = useState([]);
+  const [booksFilter, setBooksFilter] = useState([]);
   const [searchBook, setSearchBook] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -16,6 +17,7 @@ const CrudProvider = ({ children }) => {
 
   const handleSearch = (e) => {
     setSearchBook(e.target.value);
+    search();
   };
   const handleResetFilter = () => {
     setSearchBook("");
@@ -61,37 +63,27 @@ const CrudProvider = ({ children }) => {
       setLoading(false);
     });
   };
-
   useEffect(() => {
-    setLoading(true);
-    api.get(url, options).then((res) => {
-      if (!res.err) {
-        let booksWithoutFilter = res.books;
-        const booksFilter = booksWithoutFilter
-          .filter((el) => {
-            if (searchBook === "") {
-              return el;
-            } else if (
-              el.name.toLowerCase().includes(searchBook.toLowerCase()) ||
-              el.description.toLowerCase().includes(searchBook.toLowerCase())
-            ) {
-              return el;
-            }
-          })
-          .map((el) => {
-            return el;
-          });
-        setBooksApi(booksFilter);
-        setError(null);
-      } else {
-        setBooksApi("");
-        setError(res);
-      }
-      setLoading(false);
-    });
+    apiGet();
+  }, []);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchBook]);
+  const search = () => {
+    const booksWithFilter = booksApi
+      .filter((el) => {
+        if (searchBook === "") {
+          return el;
+        } else if (
+          el.name.toLowerCase().includes(searchBook.toLowerCase()) ||
+          el.description.toLowerCase().includes(searchBook.toLowerCase())
+        ) {
+          return el;
+        }
+      })
+      .map((el) => {
+        return el;
+      });
+    setBooksFilter(booksWithFilter);
+  };
 
   let urlPost = "https://mern-books-server.herokuapp.com/api/books/new/";
 
@@ -170,6 +162,7 @@ const CrudProvider = ({ children }) => {
     contentAlert,
     setIsDelete,
     handleDelete,
+    booksFilter,
   };
   return <CrudContext.Provider value={data}>{children}</CrudContext.Provider>;
 };

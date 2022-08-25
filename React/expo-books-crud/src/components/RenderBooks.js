@@ -3,11 +3,12 @@ import CrudContext from "../context/CrudContext";
 import CardBook from "./CardBook";
 
 const RenderBooks = () => {
-  const { booksApi } = useContext(CrudContext);
+  const { booksFilter, booksApi } = useContext(CrudContext);
   return (
     <div className="grid-1-4">
-      {booksApi.length > 0 &&
-        booksApi.map((el) => <CardBook key={el.id} el={el} />)}
+      {booksFilter.length > 0
+        ? booksFilter.map((el) => <CardBook key={el.id} el={el} />)
+        : booksApi.map((el) => <CardBook key={el.id} el={el} />)}
     </div>
   );
 };
