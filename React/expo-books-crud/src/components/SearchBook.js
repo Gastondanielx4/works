@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import TextField from "@mui/material/TextField";
-import { IconButton, styled } from "@mui/material";
+import { Button, IconButton, styled } from "@mui/material";
 import CrudContext from "../context/CrudContext";
 import Edit from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
@@ -40,6 +40,13 @@ export const SearchBook = () => {
       >
         <Edit fontSize="inherit" />
       </CustomIconButton>
+      <Button
+        onClick={() => {
+          navigate(`/login`);
+        }}
+      >
+        Login
+      </Button>
     </div>
   );
 };

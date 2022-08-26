@@ -35,30 +35,6 @@ const CrudProvider = ({ children }) => {
     setBooksFilter(booksWithFilter);
   };
 
-  /* const handleResetFilter = () => {
-    setSearchBook("");
-  }; */
-  const handleDelete = (confirm) => {
-    if (confirm) {
-      let endpoint = `${url}/${isDelete}`;
-      let options = {
-        headers: {
-          "content-type": "application/json",
-          "x-token": token,
-        },
-      };
-
-      api.del(endpoint, options).then((res) => {
-        if (!res.err) {
-          apiGet();
-        } else {
-          setError(res);
-        }
-      });
-    } else {
-      return;
-    }
-  };
   let api = helpHttp();
   let url = "https://mern-books-server.herokuapp.com/api/books/";
   let options = {
@@ -67,6 +43,7 @@ const CrudProvider = ({ children }) => {
     },
   };
   const apiGet = () => {
+    setLoading(true);
     api.get(url, options).then((res) => {
       if (!res.err) {
         let booksWithoutFilter = res.books;
@@ -94,7 +71,6 @@ const CrudProvider = ({ children }) => {
         "x-token": token,
       },
     };
-
     api.post(urlPost, options).then((res) => {
       if (!res.err) {
         apiGet();
@@ -112,7 +88,6 @@ const CrudProvider = ({ children }) => {
 
   const updateData = (data, id) => {
     let endpoint = `${url}/${id}`;
-
     let options = {
       body: data,
       headers: {
@@ -120,7 +95,6 @@ const CrudProvider = ({ children }) => {
         "x-token": token,
       },
     };
-
     api.put(endpoint, options).then((res) => {
       if (!res.err) {
         apiGet();
@@ -136,6 +110,27 @@ const CrudProvider = ({ children }) => {
     });
   };
 
+  const handleDelete = (confirm) => {
+    if (confirm) {
+      let endpoint = `${url}/${isDelete}`;
+      let options = {
+        headers: {
+          "content-type": "application/json",
+          "x-token": token,
+        },
+      };
+
+      api.del(endpoint, options).then((res) => {
+        if (!res.err) {
+          apiGet();
+        } else {
+          setError(res);
+        }
+      });
+    } else {
+      return;
+    }
+  };
   const deleteData = (id, name) => {
     setContentAlert({
       title: name,
