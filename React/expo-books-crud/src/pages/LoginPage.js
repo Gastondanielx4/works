@@ -40,7 +40,7 @@ const LoginPage = () => {
             {/*  {error && <Alert variant="danger">{error}</Alert>} */}
             <Form /* onSubmit={submitHandler} */>
               <Form.Group id="email">
-                <Form.Label>User</Form.Label>
+                <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
                   /* ref={emailRef} */ required
@@ -69,29 +69,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-/* let urlAuth = "https://mern-books-server.herokuapp.com/api/auth";
-const authLogin = (data) => {
-  let options = {
-    body: data,
-    headers: {
-      "content-type": "application/json",
-      "x-token": token,
-    },
-  };
-
-  api.post(urlLogin, options).then((res) => {
-    if (!res.err) {
-      apiGet();
-      setContentAlert({
-        title: "Book added!",
-        icon: "success",
-        type: "show",
-      });
-      setAlertOk(true);
-    } else {
-      setError(res);
-    }
-  });
-};
- */

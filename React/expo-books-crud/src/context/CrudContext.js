@@ -140,6 +140,32 @@ const CrudProvider = ({ children }) => {
     setAlertOk(true);
     setIsDelete(id);
   };
+
+  let urlAuth = "https://mern-books-server.herokuapp.com/api/auth";
+  const authLogin = (data) => {
+    let options = {
+      body: data,
+      headers: {
+        "content-type": "application/json",
+        "x-token": token,
+      },
+    };
+
+    api.post(urlAuth, options).then((res) => {
+      if (!res.err) {
+        apiGet();
+        setContentAlert({
+          title: "Book added!",
+          icon: "success",
+          type: "show",
+        });
+        setAlertOk(true);
+      } else {
+        setError(res);
+      }
+    });
+  };
+
   const data = {
     booksApi,
     handleSearch,
@@ -155,6 +181,7 @@ const CrudProvider = ({ children }) => {
     setIsDelete,
     handleDelete,
     booksFilter,
+    authLogin,
   };
   return <CrudContext.Provider value={data}>{children}</CrudContext.Provider>;
 };
