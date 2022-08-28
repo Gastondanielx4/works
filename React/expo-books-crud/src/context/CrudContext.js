@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import { createContext, useEffect, useState } from "react";
 import { helpHttp } from "../helper/helpHttp";
-import { token } from "../helper/token";
+import { token1 } from "../helper/token1";
 
 const CrudContext = createContext();
 
@@ -13,6 +13,7 @@ const CrudProvider = ({ children }) => {
   const [alertOk, setAlertOk] = useState(false);
   const [contentAlert, setContentAlert] = useState({});
   const [isDelete, setIsDelete] = useState(null);
+  const [token, setToken] = useState("");
 
   const handleSearch = (e) => {
     search(e.target.value);
@@ -39,7 +40,7 @@ const CrudProvider = ({ children }) => {
   let url = "https://mern-books-server.herokuapp.com/api/books/";
   let options = {
     headers: {
-      "x-token": token,
+      "x-token": token1,
     },
   };
   const apiGet = () => {
@@ -48,7 +49,6 @@ const CrudProvider = ({ children }) => {
       if (!res.err) {
         let booksWithoutFilter = res.books;
         setBooksApi(booksWithoutFilter);
-        setError(null);
       } else {
         setBooksApi("");
         setError(res);
@@ -140,32 +140,6 @@ const CrudProvider = ({ children }) => {
     setAlertOk(true);
     setIsDelete(id);
   };
-
-  let urlAuth = "https://mern-books-server.herokuapp.com/api/auth";
-  const authLogin = (data) => {
-    let options = {
-      body: data,
-      headers: {
-        "content-type": "application/json",
-        "x-token": token,
-      },
-    };
-
-    api.post(urlAuth, options).then((res) => {
-      if (!res.err) {
-        apiGet();
-        setContentAlert({
-          title: "Book added!",
-          icon: "success",
-          type: "show",
-        });
-        setAlertOk(true);
-      } else {
-        setError(res);
-      }
-    });
-  };
-
   const data = {
     booksApi,
     handleSearch,
@@ -181,7 +155,9 @@ const CrudProvider = ({ children }) => {
     setIsDelete,
     handleDelete,
     booksFilter,
-    authLogin,
+    setError,
+    setToken,
+    setLoading,
   };
   return <CrudContext.Provider value={data}>{children}</CrudContext.Provider>;
 };
