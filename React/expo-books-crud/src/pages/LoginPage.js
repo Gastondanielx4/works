@@ -37,7 +37,17 @@ const LoginPage = () => {
               justifyContent: "center",
             }}
           >
-            <h3 className="text-center mb-2">Sign In</h3>
+            <h3 style={{ textAlign: "center" }}>Books Administrator</h3>
+            <hr
+              style={{
+                fontSize: "2rem",
+                border: "none",
+                backgroundColor: "#222",
+                height: "0.2rem",
+                margin: "1rem 2rem ",
+              }}
+            />
+            <h4 className="text-center mb-2">Sign In</h4>
             {/*  {error && <Alert variant="danger">{error}</Alert>} */}
             <Form onSubmit={handlerSubmit}>
               <Form.Group id="email">

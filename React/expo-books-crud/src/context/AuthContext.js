@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { helpHttp } from "../helper/helpHttp";
-import { token } from "../helper/token1";
 import CrudContext from "./CrudContext";
 const authContext = React.createContext();
 
@@ -14,19 +13,7 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState();
   const { setError, setToken } = useContext(CrudContext);
 
-  function signin(email, password) {
-    //hook with sign in api
-    console.log("sign in");
-
-    /*     const foundUser = users.filter(
-      (user) => user.email === email && user.password === password
-    );
-    if (foundUser.length) setUser(foundUser[0]);
-    else throw new Error("Wrong email or password"); */
-  }
-
   function logout() {
-    //hook with logout api
     console.log("logout");
 
     setUser(false);
@@ -48,6 +35,7 @@ export default function AuthProvider({ children }) {
       if (!res.err) {
         setToken(res.user.token);
         console.log(res);
+        setUser(true);
         /* apiGet(); */
         /* setContentAlert({
           title: "Book added!",
@@ -61,7 +49,7 @@ export default function AuthProvider({ children }) {
     });
   };
 
-  const value = { user, signin, logout, authLogin };
+  const value = { user, logout, authLogin };
 
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 }
