@@ -1,10 +1,10 @@
-import { Alert, Link } from "@mui/material";
 import React, { useContext, useRef } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import CrudContext from "../context/CrudContext";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useAuth } from "../context/AuthContext";
+import { AlertOk } from "../components/AlertOk";
 
 const LoginPage = () => {
   let navigate = useNavigate();
@@ -49,41 +49,32 @@ const LoginPage = () => {
               }}
             />
             <h4 className="text-center mb-2">Sign In</h4>
-            {/*  {error && <Alert variant="danger">{error}</Alert>} */}
+            {alertOk && <AlertOk />}
             <Form onSubmit={handlerSubmit}>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
-                  /*   name="email" */
                   type="email"
                   ref={emailRef}
                   required
-                  /*   onChange={handleChange}
-                  value={user.email} */
                 ></Form.Control>
               </Form.Group>
               <Form.Group id="password">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
-                  /* name="password" */
                   type="password"
                   ref={passwordRef}
                   required
-                  /*  onChange={handleChange}
-                  value={user.password} */
                 ></Form.Control>
               </Form.Group>
-              <Button
-                type="submit"
-                className="w-100 mt-2" /* disabled={waiting} */
-              >
+              <Button type="submit" className="w-100 mt-2">
                 Sign In
               </Button>
             </Form>
             <Button
               onClick={() => navigate(`/`)}
               type="submit"
-              style={{ backgroundColor: "#3a51b0" }} /* disabled={waiting} */
+              style={{ backgroundColor: "#3a51b0" }}
             >
               {<ArrowBackIcon></ArrowBackIcon>} Back to Books
             </Button>

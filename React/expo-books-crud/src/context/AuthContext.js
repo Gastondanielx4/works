@@ -47,7 +47,14 @@ export default function AuthProvider({ children }) {
         setNameOfUser(res.user.email);
         /* apiGet(); */
       } else {
+        setContentAlert({
+          title: `User or password incorrect`,
+          icon: "error",
+          type: "show",
+        });
+        setAlertOk(true);
         setError(res);
+        console.log(res);
         setTimeout(() => {
           setError(null);
         }, 8000);
