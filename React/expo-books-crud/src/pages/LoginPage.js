@@ -11,7 +11,7 @@ const LoginPage = () => {
   const { alertOk } = useContext(CrudContext);
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { authLogin } = useAuth();
+  const { authLogin, user } = useAuth();
 
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +21,7 @@ const LoginPage = () => {
 
   return (
     <div>
+      {user && navigate(`/edit`)}
       <div
         style={{
           display: "flex",

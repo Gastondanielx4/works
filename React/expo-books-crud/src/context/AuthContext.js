@@ -11,7 +11,9 @@ export function useAuth() {
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState();
-  const { setError, setToken } = useContext(CrudContext);
+  const [nameOfUser, setNameOfUser] = useState("");
+  const { setError, setToken, setContentAlert, setAlertOk } =
+    useContext(CrudContext);
 
   function logout() {
     console.log("logout");
@@ -33,23 +35,27 @@ export default function AuthProvider({ children }) {
     };
     api.post(urlAuth, options).then((res) => {
       if (!res.err) {
+        setContentAlert({
+          title: `Welcome "${res.user.email}"`,
+          icon: "success",
+          type: "show",
+        });
+        setAlertOk(true);
         setToken(res.user.token);
         console.log(res);
         setUser(true);
+        setNameOfUser(res.user.email);
         /* apiGet(); */
-        /* setContentAlert({
-          title: "Book added!",
-          icon: "success",
-          type: "show",
-        }); */
-        /* setAlertOk(true); */
       } else {
         setError(res);
+        setTimeout(() => {
+          setError(null);
+        }, 8000);
       }
     });
   };
 
-  const value = { user, logout, authLogin };
+  const value = { user, logout, authLogin, nameOfUser };
 
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 }

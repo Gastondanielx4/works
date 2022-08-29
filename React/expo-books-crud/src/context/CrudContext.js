@@ -13,7 +13,7 @@ const CrudProvider = ({ children }) => {
   const [alertOk, setAlertOk] = useState(false);
   const [contentAlert, setContentAlert] = useState({});
   const [isDelete, setIsDelete] = useState(null);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(null);
 
   const handleSearch = (e) => {
     search(e.target.value);
@@ -52,6 +52,9 @@ const CrudProvider = ({ children }) => {
       } else {
         setBooksApi("");
         setError(res);
+        setTimeout(() => {
+          setError(null);
+        }, 8000);
       }
       setLoading(false);
     });
@@ -82,6 +85,9 @@ const CrudProvider = ({ children }) => {
         setAlertOk(true);
       } else {
         setError(res);
+        setTimeout(() => {
+          setError(null);
+        }, 8000);
       }
     });
   };
@@ -106,6 +112,9 @@ const CrudProvider = ({ children }) => {
         setAlertOk(true);
       } else {
         setError(res);
+        setTimeout(() => {
+          setError(null);
+        }, 8000);
       }
     });
   };
@@ -125,6 +134,9 @@ const CrudProvider = ({ children }) => {
           apiGet();
         } else {
           setError(res);
+          setTimeout(() => {
+            setError(null);
+          }, 8000);
         }
       });
     } else {
@@ -158,6 +170,7 @@ const CrudProvider = ({ children }) => {
     setError,
     setToken,
     setLoading,
+    setContentAlert,
   };
   return <CrudContext.Provider value={data}>{children}</CrudContext.Provider>;
 };
