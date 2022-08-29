@@ -45,7 +45,6 @@ export default function AuthProvider({ children }) {
         console.log(res);
         setUser(true);
         setNameOfUser(res.user.email);
-        /* apiGet(); */
       } else {
         setContentAlert({
           title: `User or password incorrect`,

@@ -37,9 +37,6 @@ export const SearchBook = () => {
         />
       </div>
       <CustomIconButton
-        /* onClick={() => {
-          navigate(`/edit`);
-        }} */
         onClick={
           user
             ? () => {
