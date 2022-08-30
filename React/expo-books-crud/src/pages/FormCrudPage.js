@@ -8,7 +8,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useContext } from "react";
 import CrudContext from "../context/CrudContext";
 import { AlertOk } from "../components/AlertOk";
-import { useAuth } from "../context/AuthContext";
 import AccountProfile from "../components/AccountProfile";
 
 const CustomizedButton = styled(Button)`
