@@ -67,6 +67,9 @@ const LoginPage = () => {
                   type="password"
                   ref={passwordRef}
                   required
+                  style={{
+                    margin: "0 0 1rem 0",
+                  }}
                 ></Form.Control>
               </Form.Group>
               <Button type="submit" className="w-100 mt-2">
