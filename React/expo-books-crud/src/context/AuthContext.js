@@ -39,21 +39,21 @@ export default function AuthProvider({ children }) {
           title: `Welcome "${res.user.email}"`,
           icon: "success",
           type: "show",
+          timer: 3000,
         });
         setAlertOk(true);
         setToken(res.user.token);
-        console.log(res);
         setUser(true);
         setNameOfUser(res.user.email);
       } else {
         setContentAlert({
-          title: `User or password incorrect`,
+          title: `Incorrect 'User' or 'password'`,
           icon: "error",
           type: "show",
+          timer: 1500,
         });
         setAlertOk(true);
         setError(res);
-        console.log(res);
         setTimeout(() => {
           setError(null);
         }, 8000);
@@ -61,7 +61,7 @@ export default function AuthProvider({ children }) {
     });
   };
 
-  const value = { user, logout, authLogin, nameOfUser };
+  const value = { user, logout, authLogin, nameOfUser, setUser };
 
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 }
