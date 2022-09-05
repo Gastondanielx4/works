@@ -7,7 +7,7 @@ const CrudContext = createContext();
 
 const CrudProvider = ({ children }) => {
   const [booksApi, setBooksApi] = useState([]);
-  const [booksFilter, setBooksFilter] = useState([]);
+  const [booksFilter, setBooksFilter] = useState(booksApi);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [alertOk, setAlertOk] = useState(false);
@@ -19,20 +19,16 @@ const CrudProvider = ({ children }) => {
     search(e.target.value);
   };
   const search = (searchBooks) => {
-    const booksWithFilter = booksApi
-      .filter((el) => {
-        if (searchBooks === "") {
-          return el;
-        } else if (
-          el.name.toLowerCase().includes(searchBooks.toLowerCase()) ||
-          el.description.toLowerCase().includes(searchBooks.toLowerCase())
-        ) {
-          return el;
-        }
-      })
-      .map((el) => {
-        return el;
-      });
+    const booksWithFilter = booksApi.filter((book) => {
+      if (searchBooks === "") {
+        return book;
+      } else if (
+        book.name.toLowerCase().includes(searchBooks.toLowerCase()) ||
+        book.description.toLowerCase().includes(searchBooks.toLowerCase())
+      ) {
+        return book;
+      }
+    });
     setBooksFilter(booksWithFilter);
   };
 
@@ -61,6 +57,7 @@ const CrudProvider = ({ children }) => {
   };
   useEffect(() => {
     apiGet();
+    setBooksFilter(booksApi);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
