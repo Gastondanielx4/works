@@ -14,21 +14,27 @@ const CrudProvider = ({ children }) => {
   const [contentAlert, setContentAlert] = useState({});
   const [isDelete, setIsDelete] = useState(null);
   const [token, setToken] = useState(null);
+  const [searched, setSearched] = useState("");
 
   const handleSearch = (e) => {
     search(e.target.value);
+    setSearched(e.target.value);
   };
   const search = (searchBooks) => {
-    const booksWithFilter = booksApi.filter((book) => {
-      if (searchBooks === "") {
+    const booksWithFilter = booksApi
+      .filter((book) => {
+        if (searchBooks === "") {
+          return book;
+        } else if (
+          book.name.toLowerCase().includes(searchBooks.toLowerCase()) ||
+          book.description.toLowerCase().includes(searchBooks.toLowerCase())
+        ) {
+          return book;
+        }
+      })
+      .map((book) => {
         return book;
-      } else if (
-        book.name.toLowerCase().includes(searchBooks.toLowerCase()) ||
-        book.description.toLowerCase().includes(searchBooks.toLowerCase())
-      ) {
-        return book;
-      }
-    });
+      });
     setBooksFilter(booksWithFilter);
   };
 
@@ -168,6 +174,7 @@ const CrudProvider = ({ children }) => {
     setToken,
     setLoading,
     setContentAlert,
+    searched,
   };
   return <CrudContext.Provider value={data}>{children}</CrudContext.Provider>;
 };
