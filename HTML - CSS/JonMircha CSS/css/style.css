@@ -173,3 +173,119 @@ https://developer.mozilla.org/es/docs/Web/CSS/Pseudo-classes
 .articulo-pseudoclases *:not(p) {
   background-color: grey;
 }
+/* Pseudo elementos- Dan a estilos a partes especificas de un elemento, se usa el :: para diferenciarlos de las pseudo clases
+https://developer.mozilla.org/es/docs/Web/CSS/Pseudo-elements
+ */
+.saga-geminis::before {
+  content: "🤼";
+}
+.saga-geminis::after {
+  content: "♊";
+}
+.saga-precio::before {
+  content: "$";
+  font-weight: bold;
+}
+.saga-precio::after {
+  content: "USD";
+  font-weight: bold;
+}
+.p-pseudoelementos::first-letter {
+  font-weight: bold;
+  font-size: 32px;
+}
+.p-pseudoelementos::first-line {
+  color: coral;
+}
+.p-pseudoelementos::selection {
+  color: greenyellow;
+  background-color: black;
+}
+/* para cambiar la clase de cuando seleccionamos el texto en la web, con asterisco para que cambie todo el documento */
+/* *::selection {
+  color: greenyellow;
+  background-color: black;
+} */
+
+.input-pseudoelementos::placeholder {
+  color: green;
+}
+
+/* Agrupar selectores */
+.form-agrupar-selectores input[type="text"],
+.form-agrupar-selectores input[type="email"],
+.form-agrupar-selectores textarea {
+  border-color: yellow;
+  border-width: 2px;
+  border-style: dashed;
+  background-color: black;
+  font-size: 20px;
+  display: block;
+  width: 300px;
+}
+
+/* 
+El algoritmo de CSS: Es la forma en que el navegador aplica los estilos al documento HTML. Es vital entender este concepto para que entiendas como se aplican y en algunas ocasiones se sobreescriben las reglas CSS
+1)La Cascada
+2)La especificidad
+3)La Herencia
+
+La cascada es el mecanismo en que el navegador aplica los estilos. Y toma en cuenta lo  siguiente en este orden:
+1) El Origen del Codigo:
+ -El User Agent (los estilos por defecto del navegador)
+ -Personalizaciones del usuario.
+ -Los estilos del autor.
+ 2) La especificidad del Selector
+ 3)Orden de aparicion
+
+ La Especificidad es el peso que tiene un selector cuando hay conflicto de estilos. Se calcula de la siguiente forma
+ Etiquetas y psudoelementos -------------- 0,0,0,1
+ Clases, atributos y pseudoclases ---------- 0,0,1,0
+ Identificadores ----------------------------- 0,1,0,0
+ Estilos en linea ----------------------------- 1,0,0,0
+ !important ----------------Rompe la especificidad
+
+ La herencia, es la capacidad de un selector de obtener (heredar), los valores de sus ancestros mas cercanos, para aplicarla se usa el valor inherit, si queremos evitarla podemos asigar otro valor o inicializar la propiedad en cuestion con el valor initial
+ https://web.dev/learn/css/inheritance/#which-properties-are-inheritable
+ */
+
+blockquote#cita-marco.cita-marco {
+  background-color: lightsteelblue;
+}
+blockquote {
+  background-color: burlywood;
+}
+#cita-marco {
+  background-color: lightgreen;
+}
+/* Sin espacio da mas especificidad */
+blockquote.cita-marco {
+  background-color: tomato;
+}
+.cita-marco {
+  background-color: cornflowerblue;
+}
+blockquote#cita-marco {
+  background-color: lightsalmon;
+}
+.cita-marco {
+  background-color: mediumaquamarine !important;
+}
+.cita-marco {
+  background-color: moccasin !important;
+  background-color: darkorange !important;
+  font-size: 32px;
+  border-style: dotted;
+  border-color: red;
+}
+#cite-marco {
+  background-color: lightgreen;
+}
+.cita-marco cite {
+  background-color: pink;
+  background-color: inherit;
+  font-size: 24px;
+  font-size: initial;
+  border-style: inherit;
+  border-color: inherit;
+}
