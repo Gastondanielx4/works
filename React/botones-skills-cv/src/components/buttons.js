@@ -98,13 +98,13 @@ export default function CustomizedButtons() {
       >
         Bootstrap
       </BootstrapButton>
-      <BootstrapButton
+      {/*  <BootstrapButton
         variant="contained"
         disableRipple
         startIcon={<FaHtml5 />}
       >
         Ajax
-      </BootstrapButton>
+      </BootstrapButton> */}
       <BootstrapButton
         variant="contained"
         disableRipple
