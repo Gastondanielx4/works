@@ -15,7 +15,7 @@ const CrudProvider = ({ children }) => {
   const [isDelete, setIsDelete] = useState(null);
   const [token, setToken] = useState(null);
   const [searched, setSearched] = useState("");
-
+    
   const handleSearch = (e) => {
     search(e.target.value);
     setSearched(e.target.value);

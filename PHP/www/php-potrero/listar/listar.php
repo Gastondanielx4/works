@@ -31,8 +31,8 @@
     </tr>
     <?php
     // 1) Conexion
-      $conexion = mysqli_connect("127.0.0.1", "root", "");
-        mysqli_select_db($conexion, "potrero");
+ $conexion = mysqli_connect("localhost", "root", "");
+        mysqli_select_db($conexion, "id19501423_potrero");
 
 
     // 2) Preparar la orden SQL
@@ -41,7 +41,7 @@
     // => Selecciona todos los campos de la siguiente tabla
     // SELECT campos_tabla FROM nombre_tabla
     // => Selecciona los siguientes campos de la siguiente tabla
- $consulta='SELECT * FROM ropa';
+ $consulta='SELECT * FROM tienda_ropa';
 
     // 3) Ejecutar la orden y obtenemos los registros
 
@@ -49,12 +49,12 @@
     // 4) Mostrar los datos del registro
     while ( $reg = mysqli_fetch_array($datos) ) { ?>
         <tr>
-        <td><?php echo $reg['id']; ?></td>
-        <td><?php echo $reg['tipo_de_prenda']; ?></td>
-        <td><?php echo $reg['marca']; ?></td>
-        <td><?php echo $reg['talle']; ?></td>
-        <td><?php echo $reg['precio']; ?></td>
-        <td><img class="card-img-top" src="data:image/jpg;base64, <?php echo base64_encode($reg['imagen'])?>" alt="" height="100px")></td>
+            <td><?php echo $reg['id']; ?></td>
+            <td><?php echo $reg['tipo_de_prenda']; ?></td>
+            <td><?php echo $reg['marca']; ?></td>
+            <td><?php echo $reg['talle']; ?></td>
+            <td><?php echo $reg['precio']; ?></td>
+            <td> <img class="card-img-top" src="data:image/jpg;base64, <?php echo base64_encode($reg['imagen'])?>" alt="" width="100px" height="100px")></td>
         </tr>
     <?php } ?>
     </table>
