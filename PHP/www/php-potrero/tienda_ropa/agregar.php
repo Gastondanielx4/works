@@ -27,6 +27,6 @@
   mysqli_query($conexion,$consulta);
 
    // a) rederigir a index
-   header('location: index.html');
+   header('location: admin.php');
 
 ?>

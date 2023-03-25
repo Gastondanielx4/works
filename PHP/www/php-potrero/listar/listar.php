@@ -32,7 +32,7 @@
     <?php
     // 1) Conexion
  $conexion = mysqli_connect("localhost", "root", "");
-        mysqli_select_db($conexion, "id19501423_potrero");
+        mysqli_select_db($conexion, "potrero");
 
 
     // 2) Preparar la orden SQL
@@ -41,7 +41,7 @@
     // => Selecciona todos los campos de la siguiente tabla
     // SELECT campos_tabla FROM nombre_tabla
     // => Selecciona los siguientes campos de la siguiente tabla
- $consulta='SELECT * FROM tienda_ropa';
+ $consulta='SELECT * FROM ropa';
 
     // 3) Ejecutar la orden y obtenemos los registros
 
@@ -55,6 +55,7 @@
             <td><?php echo $reg['talle']; ?></td>
             <td><?php echo $reg['precio']; ?></td>
             <td> <img class="card-img-top" src="data:image/jpg;base64, <?php echo base64_encode($reg['imagen'])?>" alt="" width="100px" height="100px")></td>
+            
         </tr>
     <?php } ?>
     </table>
