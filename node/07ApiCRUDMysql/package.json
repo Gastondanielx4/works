@@ -1,0 +1,26 @@
+{
+  "name": "api-crud-mysql",
+  "version": "0.0.1",
+  "description": "Api CRUD con MySql, Express, Node.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "API",
+    "CRUD",
+    "MySql"
+  ],
+  "author": "@tongas",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "express-myconnection": "^1.0.4",
+    "jade": "^1.11.0",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "serve-favicon": "^2.5.0"
+  }
+}
