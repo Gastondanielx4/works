@@ -1,10 +1,11 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import { FaReact, FaHtml5, FaCss3Alt, FaBootstrap } from "react-icons/fa";
+import Box from "@mui/material/box";
+import { FaReact, FaHtml5, FaCss3Alt, FaBootstrap, FaNodeJs, FaJira, FaGitAlt } from "react-icons/fa";
 import { SiJavascript, SiMaterialui, SiRedux } from "react-icons/si";
 import { VscJson } from "react-icons/vsc";
+import { RiNextjsFill } from "./iconNext";
 
 const BootstrapButton = styled(Button)({
   /*  marginTop: "1rem",
@@ -47,15 +48,16 @@ const BootstrapButton = styled(Button)({
 
 export default function CustomizedButtons() {
   return (
-    <Stack
-      direction="row"
-      justifyContent="flex-start"
-      alignItems="center"
-      style={{
-        flexWrap: "wrap",
-        width: "440px",
-      }}
-    >
+    <>
+    <Box sx={{width: 600}}>
+        <BootstrapButton
+        variant="contained"
+        disableRipple
+        startIcon={<RiNextjsFill />}
+        /*  style={{ marginTop: "1rem", marginBottom: "1rem" }} */
+      >
+        Next.js
+      </BootstrapButton>
       <BootstrapButton
         variant="contained"
         disableRipple
@@ -77,6 +79,8 @@ export default function CustomizedButtons() {
       >
         HTML5
       </BootstrapButton>
+      </Box>
+      <Box sx={{width: 600}}>
       <BootstrapButton
         variant="contained"
         disableRipple
@@ -112,6 +116,7 @@ export default function CustomizedButtons() {
       >
         JSON
       </BootstrapButton>
+      </Box>
       <BootstrapButton
         variant="contained"
         disableRipple
@@ -120,6 +125,30 @@ export default function CustomizedButtons() {
       >
         Redux
       </BootstrapButton>
-    </Stack>
+        <BootstrapButton
+        variant="contained"
+        disableRipple
+        startIcon={<FaNodeJs />}
+        /*  style={{ marginTop: "1rem", marginBottom: "1rem" }} */
+      >
+        Node.js
+      </BootstrapButton>
+        <BootstrapButton
+        variant="contained"
+        disableRipple
+        startIcon={<FaGitAlt />}
+        /*  style={{ marginTop: "1rem", marginBottom: "1rem" }} */
+      >
+        Git
+      </BootstrapButton>
+        <BootstrapButton
+        variant="contained"
+        disableRipple
+        startIcon={<FaJira />}
+        /*  style={{ marginTop: "1rem", marginBottom: "1rem" }} */
+      >
+        Jira
+      </BootstrapButton>
+     </>
   );
 }
